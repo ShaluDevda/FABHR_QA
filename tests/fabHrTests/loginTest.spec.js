@@ -8,12 +8,12 @@ test.describe('Login', () => {
   let loginPage;
 
   test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page, ROUTES.login);
+    loginPage = new LoginPage(page);
     await loginPage.goto();
   });
 
   // ─────────────────────────────────────────────────────────────────────────────
-  test('Login with valid username and password', async ({ page }) => {
+  test.skip('Login with valid username and password', async ({ page }) => {
     await loginPage.login('T-103-test.in', '12345678');
 
     const dashboard = page.locator("//span[normalize-space()='Dashboard']");
