@@ -1,6 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","5285","login(T-10, 123) shows error","chromium","Wed Apr 30 18:17:40 IST 2025","passed","Wed Apr 30 18:17:46 IST 2025","Login > Negative login","fabHrTests\loginTest.spec.js","",""
-"","4399","Dashboard UI loads correctly","chromium","Wed Apr 30 18:17:35 IST 2025","passed","Wed Apr 30 18:17:39 IST 2025","","fabHrTests\dashboard.spec.js","",""
-"","6693","login(T-10, 12345678) shows error","chromium","Wed Apr 30 18:17:46 IST 2025","passed","Wed Apr 30 18:17:53 IST 2025","Login > Negative login","fabHrTests\loginTest.spec.js","",""
-"","6175","login(T-103-test.in, 0) shows error","chromium","Wed Apr 30 18:17:48 IST 2025","passed","Wed Apr 30 18:17:54 IST 2025","Login > Negative login","fabHrTests\loginTest.spec.js","",""
-"","11003","Login with valid username and password","chromium","Wed Apr 30 18:17:35 IST 2025","passed","Wed Apr 30 18:17:46 IST 2025","Login","fabHrTests\loginTest.spec.js","",""
