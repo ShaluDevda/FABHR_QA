@@ -5,15 +5,16 @@ class LoginPage {
      * @param {import('@playwright/test').Page} page 
      * @param {string} 
      */
-    constructor(page) {
+    constructor(page, route) {
       this.page = page;
+      this.route = route;
       this.usernameInput = page.locator('input[placeholder="Username"]');
       this.passwordInput = page.locator('input[placeholder="Password"]');
       this.loginButton = page.getByRole('button', { name: 'Log in' });
     }
   
-    async goto() {
-        await this.page.goto("http://10.1.1.102:8080//hrms/#/");
+    async navigate(url, route) {
+      await this.page.goto(url + route);
     }
   
     async login(username, password) {

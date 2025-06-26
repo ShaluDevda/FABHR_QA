@@ -43,7 +43,7 @@ export default defineConfig({
     // ignore minor SSL issues if your staging server has a self-signed cert
     ignoreHTTPSErrors: true,
     screenshot: "only-on-failure",
-    baseURL: "http://103.140.73.129:8080",
+    baseURL: "https://test.fabhr.in/hrms/#/",
     // baseURL: 'https://hrms.fabhr.in/',
     trace: "on-first-retry",
   },
