@@ -1,9 +1,0 @@
-Status: 500
-Response body: {
-  statusCode: 500,
-  message: 'Server Not Responding',
-  data: null,
-  isSuccess: false,
-  errorCode: null,
-  errorMsg: null
-}

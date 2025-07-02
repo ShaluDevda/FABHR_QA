@@ -1,2 +1,0 @@
-Status: { username: 'FABHR-72-fabhrdemo.in', password: '12345678' }
-Response body: undefined

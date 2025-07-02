@@ -13,7 +13,7 @@ test.describe('Login', () => {
   });
 
   // ─────────────────────────────────────────────────────────────────────────────
-  test.only('Login with valid username and password', async ({ page }) => {
+  test('Login with valid username and password', async ({ page }) => {
     await loginPage.login('FABHR-72-fabhrdemo.in', '12345678');
 
     const dashboard = page.locator("//span[normalize-space()='Dashboard']");
@@ -44,7 +44,7 @@ test.describe('Login', () => {
       expected: 'You have entered incorrect username.'
     },
     {
-      user: 'T-103-test.in',
+      user: 'FABHR-72-fabhrdemo.in',
       pass: '0',
       selector: "//p[@class='loginError login-errorT']",
       // dynamic password-attempt message
