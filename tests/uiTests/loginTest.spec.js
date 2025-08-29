@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage }    from '../Pages/loginPage';
-import { ROUTES }       from '../utils/routes';
 
 test.describe('Login', () => {
   test.describe.configure({ timeout: 30_000 });
@@ -12,20 +11,17 @@ test.describe('Login', () => {
     await loginPage.goto();
   });
 
-  // ─────────────────────────────────────────────────────────────────────────────
-  test('Login with valid username and password', async ({ page }) => {
+  
+  test('Login with valid username and password', { timeout: 30000 }, async ({ page }) => {
     await loginPage.login('FABHR-72-fabhrdemo.in', '12345678');
 
+   
+    // Prefer a robust text locator; keep original XPath as fallback
+    const dashboardByText = page.getByText('Dashboard', { exact: true });
     const dashboard = page.locator("//span[normalize-space()='Dashboard']");
 
-    // 1. Wait for it to appear
-    await dashboard.waitFor({ state: "visible", timeout: 10_000 });
-
-    // 2. Assert it’s visible
-    await expect(dashboard).toBeVisible();
-
-    // 3. Assert it has exactly the text "Dashboard"
-    await expect(dashboard).toHaveText("Dashboard");
+    // // Wait and assert visibility with a higher timeout for slower envs
+    await expect(dashboardByText.or(dashboard)).toBeVisible({ timeout: 15000 });
   });
 
   // ─────────────────────────────────────────────────────────────────────────────

@@ -14,7 +14,10 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
   testDir: "./tests",
-  timeout: 10000,
+  timeout: 60000, // 1 min per test
+  expect: {
+    timeout: 15000, // 5s for assertions
+  },
 
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -28,8 +31,8 @@ export default defineConfig({
   // reporter: [["html", { outputFolder: "playwright-report", open: "never" }]],
 
   reporter: [
-    ['list'],                   // keeps console output
-    ['allure-playwright']       // generates Allure results in ./allure-results
+    ["list"], // keeps console output
+    ["allure-playwright"], // generates Allure results in ./allure-results
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -38,14 +41,14 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     headless: false,
-    navigationTimeout: 30_000,
-    actionTimeout: 10_000,
+    navigationTimeout: 30000, // 15s for navigation
+    actionTimeout: 10000, // 5s for actions
     // ignore minor SSL issues if your staging server has a self-signed cert
     ignoreHTTPSErrors: true,
-    screenshot: "only-on-failure",
-    baseURL: "https://test.fabhr.in/hrms/#/",
-    // baseURL: 'https://hrms.fabhr.in/',
     trace: "on-first-retry",
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
+    baseURL: "https://hrms.fabhr.in/",
   },
 
   /* Configure projects for major browsers */

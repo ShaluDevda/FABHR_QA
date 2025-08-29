@@ -1,0 +1,32 @@
+{
+  "happy": {
+    "status": 200,
+    "message": "success",
+    "employeeCode": "FABHR-537",
+    "roles": ["Admin"],
+    "userId": 369,
+    "employeeId": 368,
+    "loginName": "FABHR-537-fabhrdemo.in",
+    "emailOfUser": "neelesh@fabhr.in"
+  },
+  "negative": [
+    {
+      "username": "T-10",
+      "password": "123",
+      "status": 500,
+      "expected": "Server Not Responding"
+    },
+    {
+      "username": "T-10",
+      "password": "12345678",
+      "status": 500,
+      "expected": "Server Not Responding"
+    },
+    {
+      "username": "FABHR-72-fabhrdemo.in",
+      "password": "0",
+      "status": 200,
+      "expectedRegex": "^\\s*(?:Incorrect password .* \\d+ unsuccessful attempt's out of 5 allowed attempts\\.|Error! User Blocked)\\s*$"
+    }
+  ]
+} 

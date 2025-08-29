@@ -11,6 +11,8 @@ class DashboardPage {
   
     async validateCountersVisible() {
       await this.birthdayCounter.toContainText("Announcements");
+  
+    await expect(this.birthdayCounter).toBeVisible();
     }
   
     async openQuickAction() {

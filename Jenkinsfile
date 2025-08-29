@@ -18,6 +18,12 @@ pipeline {
             }
         }
 
+        stage('Install Allure CLI') {
+            steps {
+                sh 'npm install -D allure-commandline'
+            }
+        }
+
         stage('Run Tests') {
             steps {
                 // Run Playwright tests

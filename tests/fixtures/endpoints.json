@@ -1,3 +1,4 @@
 {
-  "login": "https://hrms.fabhr.in/hrmsApi/login"
+  "login": "/hrmsApi/login",
+  "logout": "/hrmsApi/userLogOut"
 }

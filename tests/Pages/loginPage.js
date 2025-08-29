@@ -13,7 +13,7 @@ class LoginPage {
     }
   
     async goto() {
-        await this.page.goto("http://10.1.1.102:8080//hrms/#/");
+        await this.page.goto("https://hrms.fabhr.in/hrms/#/");
     }
   
     async login(username, password) {
