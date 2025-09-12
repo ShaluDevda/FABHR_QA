@@ -1,4 +1,6 @@
 {
   "login": "/hrmsApi/login",
-  "logout": "/hrmsApi/userLogOut"
+  "logout": "/hrmsApi/userLogOut",
+  "massCommunication": "/hrmsApi/massCommunication",
+  "getAllCheckinData": "/hrmsApi/attendanceLog/getAllCheckInDetails/emp/368"
 }

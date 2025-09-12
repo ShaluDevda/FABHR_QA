@@ -26,36 +26,69 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 1,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : 4, // Adjust based on your system
+  
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  // reporter: [["html", { outputFolder: "playwright-report", open: "never" }]],
-
   reporter: [
     ["list"], // keeps console output
+    ["html", { outputFolder: "playwright-report", open: "never" }],
     ["allure-playwright"], // generates Allure results in ./allure-results
+    ["junit", { outputFile: "test-results/results.xml" }], // For CI/CD integration
+    ["json", { outputFile: "test-results/results.json" }], // For reporting tools
   ],
+
+  /* Global timeout settings */
+  globalTimeout: 60000, // equivalent to execTimeout
+  maxFailures: process.env.CI ? 0 : 5, // Allow some failures in development
+
+  /* Test Results and Artifacts */
+  outputDir: 'test-results/',
+  
+  /* Global Test Configuration */
+  testMatch: '**/*.{test,spec}.{js,ts}',
+  testIgnore: '**/node_modules/**',
+
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
+    baseURL: process.env.CANONICAL_HOSTNAME || "https://hrms.fabhr.in/",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     headless: false,
-    navigationTimeout: 30000, // 15s for navigation
-    actionTimeout: 10000, // 5s for actions
-    // ignore minor SSL issues if your staging server has a self-signed cert
-    ignoreHTTPSErrors: true,
+    
+    /* Viewport settings - equivalent to Cypress viewportWidth/viewportHeight */
+    viewport: { width: 1920, height: 1080 },
+    
+    /* Timeout settings - equivalent to Cypress timeouts */
+    navigationTimeout: 80000, // equivalent to pageLoadTimeout
+    actionTimeout: 10000, // equivalent to defaultCommandTimeout
+    requestTimeout: 10000, // equivalent to requestTimeout
+    responseTimeout: 8000, // equivalent to responseTimeout
+    
+    /* Security and performance settings */
+    ignoreHTTPSErrors: true, // equivalent to chromeWebSecurity: false
+    waitForAnimations: true, // equivalent to waitForAnimations
+    
+    /* Trace and screenshot settings */
     trace: "on-first-retry",
     screenshot: "only-on-failure",
-    video: "retain-on-failure",
-    baseURL: "https://hrms.fabhr.in/",
+    video: "retain-on-failure"
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: { 
+        ...devices["Desktop Chrome"],
+        // Additional Chrome-specific settings
+        launchOptions: {
+          args: [
+            '--disable-web-security',
+            '--disable-features=VizDisplayCompositor'
+          ]
+        }
+      },
     },
 
     // {
@@ -89,10 +122,11 @@ export default defineConfig({
     // },
   ],
 
-  /* Run your local dev server before starting the tests */
+  /* Web Server for Local Development */
   // webServer: {
   //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
+  //   url: 'http://localhost:3000',
   //   reuseExistingServer: !process.env.CI,
+  //   timeout: 120000,
   // },
 });

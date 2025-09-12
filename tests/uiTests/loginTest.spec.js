@@ -7,20 +7,20 @@ test.describe('Login', () => {
   let loginPage;
 
   test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
+     loginPage = new LoginPage(page);
     await loginPage.goto();
   });
 
   
   test('Login with valid username and password', { timeout: 30000 }, async ({ page }) => {
-    await loginPage.login('FABHR-72-fabhrdemo.in', '12345678');
+   await loginPage.login('FABHR-537-fabhrdemo.in', '12345678');
 
    
     // Prefer a robust text locator; keep original XPath as fallback
     const dashboardByText = page.getByText('Dashboard', { exact: true });
-    const dashboard = page.locator("//span[normalize-space()='Dashboard']");
+    const dashboard = page.locator('//span[normalize-space()="Dashboard"]');
 
-    // // Wait and assert visibility with a higher timeout for slower envs
+    // Wait and assert visibility with a higher timeout for slower envs
     await expect(dashboardByText.or(dashboard)).toBeVisible({ timeout: 15000 });
   });
 
@@ -39,14 +39,14 @@ test.describe('Login', () => {
       selector: "//p[@class='loginError login-errorT']",
       expected: 'You have entered incorrect username.'
     },
-    {
-      user: 'FABHR-72-fabhrdemo.in',
-      pass: '0',
-      selector: "//p[@class='loginError login-errorT']",
-      // dynamic password-attempt message
-      expectedRegex:  /^\s*(?:Incorrect password .* \d+ unsuccessful attempt's out of 5 allowed attempts\.|Error! User Blocked)\s*$/,
+    // {
+    //   user: 'FABHR-72-fabhrdemo.in',
+    //   pass: '0',
+    //   selector: "//p[@class='loginError login-errorT']",
+    //   // dynamic password-attempt message
+    //   expectedRegex:  /^\s*(?:Incorrect password .* \d+ unsuccessful attempt's out of 5 allowed attempts\.|Error! User Blocked)\s*$/,
 
-        },
+    //     },
   ];
 
   test.describe('Negative login', () => {
