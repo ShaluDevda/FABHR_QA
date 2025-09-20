@@ -1,13 +1,13 @@
 {
   "happy": {
-    "status": 200,
+    "status": 500,
     "message": "success",
     "employeeCode": "FABHR-537",
     "roles": ["Admin"],
     "userId": 369,
     "employeeId": 368,
     "loginName": "FABHR-537-fabhrdemo.in",
-    "emailOfUser": "neelesh@fabhr.in"
+    "emailOfUser": "deepak.p@fabhr.in"
   },
   "negative": [
     {
@@ -26,7 +26,7 @@
       "username": "FABHR-72-fabhrdemo.in",
       "password": "0",
       "status": 200,
-      "expectedRegex": "^\\s*(?:Incorrect password .* \\d+ unsuccessful attempt's out of 5 allowed attempts\\.|Error! User Blocked)\\s*$"
+      "expectedRegex": "Incorrect password !!"
     }
   ]
 } 

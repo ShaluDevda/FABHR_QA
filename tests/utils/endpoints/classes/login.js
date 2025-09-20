@@ -1,17 +1,18 @@
 import endpoints from "../../../fixtures/endpoints.json" assert { type: "json" };
+import inputsData from "../../../fixtures/inputs.json" assert { type: "json" };
 
 export class LoginPage {
   constructor() {
     this.token = null;
   }
-  async loginAs(apiContext, loginBody) {
+  async   loginAs(apiContext, loginBody) {
     // const loginParams = new URLSearchParams(loginBody);
     const response = await apiContext.post(endpoints.login, {
       data: loginBody, // Automatically sets application/json
       headers: {
-        "Content-Type": "application/json",
-        tenantId: "fabhrdemo.in",
-        username: "FABHR-537-fabhrdemo.in",
+        "Content-Type": inputsData.ContentType,
+        tenantId: inputsData.tenantId,
+        username: inputsData.username,
       },
     });
     const responseBody = await response.json();
@@ -28,8 +29,8 @@ export class LoginPage {
   async logout(apiContext) {
     const response = await apiContext.get(endpoints.logout, {
       headers: {
-        tenantId: "fabhrdemo.in",
-        username: "FABHR-537-fabhrdemo.in",
+        tenantId: inputsData.tenantId,
+        username: inputsData.username,
       },
     });
     let responseBody;

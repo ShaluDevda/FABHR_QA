@@ -15,7 +15,6 @@ test.describe("Logout API", () => {
     expect(loginResp.token).toBeTruthy();
 
     const logoutResponse = await loginPage.logout(request);
-    console.log(logoutResponse.body);
     expect([200]).toContain(logoutResponse.status);
     expect(logoutResponse.body).toBeTruthy();
   });

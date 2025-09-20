@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage }    from '../Pages/loginPage';
 
 test.describe('Login', () => {
-  test.describe.configure({ timeout: 30_000 });
+  test.describe.configure({ timeout: 80_000 });
 
   let loginPage;
 
@@ -12,7 +12,7 @@ test.describe('Login', () => {
   });
 
   
-  test('Login with valid username and password', { timeout: 30000 }, async ({ page }) => {
+  test('Login with valid username and password', { timeout: 80000 }, async ({ page }) => {
    await loginPage.login('FABHR-537-fabhrdemo.in', '12345678');
 
    

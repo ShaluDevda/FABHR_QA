@@ -1,33 +1,15 @@
-import endpoints from "../../../../fixtures/endpoints.json" assert { type: "json" };
+// companyAnnouncement.js
 
 class CompanyAnnouncement {
-  async createAnnouncement(request, payload, token) {
-    const response = await request.post(endpoints.massCommunication, {
-      method: "POST",
-      data: payload,
-      headers: {
-        "Content-Type": "application/json",
-        tenantId: "fabhrdemo.in",
-        username: "FABHR-537-fabhrdemo.in",
-        token: token 
-      },
-    });
-    
-    try {
-      const responseBody = await response.json();
-      return {
-        status: response.status(),
-        body: responseBody
-      };
-    } catch (error) {
-      const responseText = await response.text();
-      return {
-        status: response.status(),
-        body: responseText || {},
-        error: error.message
-      };
+    constructor(title, message, date) {
+        this.title = title;
+        this.message = message;
+        this.date = date;
     }
-  }
+
+    announce() {
+        return `${this.date}: ${this.title} - ${this.message}`;
+    }
 }
 
-export { CompanyAnnouncement };
+module.exports = CompanyAnnouncement;

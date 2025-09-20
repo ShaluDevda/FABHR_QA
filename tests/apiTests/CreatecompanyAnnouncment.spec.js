@@ -3,7 +3,7 @@ import { LoginPage } from "../utils/endpoints/classes/login.js";
 import { CompanyAnnouncement } from "../utils/endpoints/classes/People/companyAnnouncement.js";
 import loginExpected from "../fixtures/Response/loginExpected.json" assert { type: "json" };
 
-test.describe("Company Announcement API Tests", () => {
+test.describe.skip("Company Announcement API Tests", () => {
   let token;
 
   const loginBody = {

@@ -16,7 +16,7 @@ export default defineConfig({
   testDir: "./tests",
   timeout: 60000, // 1 min per test
   expect: {
-    timeout: 15000, // 5s for assertions
+    timeout: 8000, 
   },
 
   /* Run tests in files in parallel */
@@ -24,7 +24,7 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 1,
+  retries: process.env.CI ? 1 : 1,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 4, // Adjust based on your system
   
@@ -63,11 +63,12 @@ export default defineConfig({
     navigationTimeout: 80000, // equivalent to pageLoadTimeout
     actionTimeout: 10000, // equivalent to defaultCommandTimeout
     requestTimeout: 10000, // equivalent to requestTimeout
-    responseTimeout: 8000, // equivalent to responseTimeout
+    responseTimeout: 10000, // equivalent to responseTimeout
     
     /* Security and performance settings */
     ignoreHTTPSErrors: true, // equivalent to chromeWebSecurity: false
-    waitForAnimations: true, // equivalent to waitForAnimations
+    /* Animation handling (equivalent to waitForAnimations) */
+    animations: "disabled",
     
     /* Trace and screenshot settings */
     trace: "on-first-retry",
