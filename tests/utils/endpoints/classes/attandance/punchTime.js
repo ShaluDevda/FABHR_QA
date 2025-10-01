@@ -1,4 +1,6 @@
-import endpoints from "../../../../fixtures/endpoints.json" assert { type: "json" };
+import endpoints from "../../../../fixtures/Endpoints/Attandance.json" assert { type: "json" };
+import hrmsApi from "../../../../fixtures/Endpoints/commonEndpoint.json" assert { type: "json" };
+
 import inputsData from "../../../../fixtures/inputs.json" assert { type: "json" };
 
 
@@ -12,8 +14,7 @@ class PunchTime {
    * @returns {Object} Response object with status and body
    */
   async getPunchTimeDetails(request, token, employeeCode, companyId) {
-    const url = `${endpoints.punchTime}/${employeeCode}/${companyId}`;
-    
+    const url = `${hrmsApi.hrmsApi}${endpoints.punchTime}/${employeeCode}/${companyId}`;
     const response = await request.get(url, {
       method: "GET",
       headers: {
@@ -84,7 +85,7 @@ class PunchTime {
    * @returns {Object} Response object with status and body
    */
   async getPunchTimeDetailsWithoutUsername(request, token, employeeCode, companyId) {
-    const url = `${endpoints.punchTime}/${employeeCode}/${companyId}`;
+    const url = `${hrmsApi.hrmsApi}${endpoints.punchTime}/${employeeCode}/${companyId}`;
     
     const response = await request.get(url, {
       method: "GET",
@@ -122,7 +123,7 @@ class PunchTime {
    * @returns {Object} Response object with status and body
    */
   async getPunchTimeDetailsWithInvalidCompany(request, token, employeeCode, invalidCompanyId) {
-    const url = `${endpoints.punchTime}/${employeeCode}/${invalidCompanyId}`;
+    const url = `${hrmsApi.hrmsApi}${endpoints.punchTime}/${employeeCode}/${invalidCompanyId}`;
     
     const response = await request.get(url, {
       method: "GET",

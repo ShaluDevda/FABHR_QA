@@ -1,12 +1,13 @@
 {
   "happy": {
-    "status": 500,
+    "status": 200,
     "message": "success",
     "employeeCode": "FABHR-537",
     "roles": ["Admin"],
     "userId": 369,
     "employeeId": 368,
     "loginName": "FABHR-537-fabhrdemo.in",
+    "password":"Csipl@12345",
     "emailOfUser": "deepak.p@fabhr.in"
   },
   "negative": [

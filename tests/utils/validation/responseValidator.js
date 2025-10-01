@@ -178,42 +178,7 @@ export class ResponseValidator {
     return basicValidation;
   }
 
-  /**
-   * Validates error response structure
-   * @param {Object} response - The response object
-   * @param {number} expectedStatus - Expected HTTP status code
-   * @returns {Object} Validation result
-   */
-  static validateErrorResponse(response, expectedStatus = 400) {
-    const basicValidation = this.validateBasicResponse(response, expectedStatus);
-    
-    if (!basicValidation.isValid) {
-      return basicValidation;
-    }
-
-    // Check for error fields
-    const errorFields = ['message', 'isSuccess'];
-    for (const field of errorFields) {
-      if (!(field in response.body)) {
-        basicValidation.isValid = false;
-        basicValidation.errors.push(`Missing error field: ${field}`);
-      }
-    }
-
-    if (response.body.isSuccess !== false) {
-      basicValidation.isValid = false;
-      basicValidation.errors.push('isSuccess should be false for error responses');
-    }
-
-    return basicValidation;
-  }
-
-  /**
-   * Validates 401 authentication error response
-   * @param {Object} response - The response object
-   * @param {number} expectedStatus - Expected HTTP status code (default 401)
-   * @returns {Object} Validation result
-   */
+  
   static validateAuthErrorResponse(response, expectedStatus = 401) {
     const basicValidation = this.validateBasicResponse(response, expectedStatus);
     

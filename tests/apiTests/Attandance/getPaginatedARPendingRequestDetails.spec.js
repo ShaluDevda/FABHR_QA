@@ -14,7 +14,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     const loginPage = new LoginPage();
     const loginBody = {
       username: loginExpected.happy.loginName,
-      password: "12345678",
+         password: loginExpected.happy.password,
     };
     
     const loginResponse = await loginPage.loginAs(request, loginBody);
@@ -24,7 +24,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     attendance = new Attandance();
   });
 
-  test("Get Paginated AR Pending Request Details - Success scenario", async ({ request }) => {
+  test("Get Paginated AR Pending Request Details - Success scenario @high @happy", async ({ request }) => {
     const response = await attendance.getPaginatedARPendingRequestDetails(
       request, 
       getPaginatedARPendingRequestDetailsExpected.baseRequestBody, 
@@ -45,7 +45,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     expect(typeof responseBody.totalPages).toBe("number");
   });
 
-  test("Get Paginated AR Pending Request Details - Verify AR entry appears after successful application", async ({ request }) => {
+  test("Get Paginated AR Pending Request Details - Verify AR entry appears after successful application @high @happy", async ({ request }) => {
     // First, get initial count of pending AR requests
     const initialResponse = await attendance.getPaginatedARPendingRequestDetails(
       request, 
@@ -95,7 +95,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     }
   });
 
-  test("Get Paginated AR Pending Request Details - Invalid pagination parameters", async ({ request }) => {
+  test("Get Paginated AR Pending Request Details - Invalid pagination parameters @low @negative", async ({ request }) => {
     const invalidRequestBody = {
       ...getPaginatedARPendingRequestDetailsExpected.baseRequestBody,
       currentPage: -1, // Invalid negative page
@@ -115,7 +115,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     expect(response.body.message).toBe("Bad Request");
   });
 
-  test("Get Paginated AR Pending Request Details - Without authentication token", async ({ request }) => {
+  test("Get Paginated AR Pending Request Details - Without authentication token @low @negative", async ({ request }) => {
     const response = await attendance.getPaginatedARPendingRequestDetails(
       request, 
       getPaginatedARPendingRequestDetailsExpected.baseRequestBody
@@ -127,7 +127,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     expect(response.status).not.toBe(200);
   });
 
-  test("Get Paginated AR Pending Request Details - Different page sizes", async ({ request }) => {
+  test("Get Paginated AR Pending Request Details - Different page sizes @high @happy", async ({ request }) => {
     const testCases = [
       { itemPerPage: 1, expectedMaxItems: 1 },
       { itemPerPage: 10, expectedMaxItems: 10 },
@@ -154,7 +154,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     }
   });
 
-  test("Get Paginated AR Pending Request Details - All sorting scenarios", async ({ request }) => {
+  test("Get Paginated AR Pending Request Details - All sorting scenarios  @high @happy", async ({ request }) => {
     const sortingTestCases = getPaginatedARPendingRequestDetailsExpected.sortingTestCases;
     
     for (const testCase of sortingTestCases) {
@@ -190,7 +190,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     }
   });
 
-  test("Get Paginated AR Pending Request Details - Sort by all fields with ASC and DESC", async ({ request }) => {
+  test("Get Paginated AR Pending Request Details - Sort by all fields with ASC and DESC @high @happy", async ({ request }) => {
     const sortFields = ["requestOn", "reason", "date", "days", "name", "department", "attendanceDays"];
     const sortDirections = ["ASC", "DESC"];
     

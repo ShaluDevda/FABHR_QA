@@ -1,32 +1,29 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../../utils/endpoints/classes/login.js";
 import { PunchTime } from "../../utils/endpoints/classes/attandance/punchTime.js";
-import { ResponseValidator } from "../../utils/validation/responseValidator.js";
-
+import ExpectResponse from "../../utils/endpoints/expect/expectResponse.js";
 import loginExpected from "../../fixtures/Response/loginExpected.json" assert { type: "json" };
-import { json } from "stream/consumers";
 
-test.describe("Punch Time Details GET API", () => {
-  let token;
+test.describe("GET| - hrmsApi/punchTime/FABHR-72-fabhrdemo.in/1 Punch Time Details GET API", () => {
+  let token, loginPage;
   const loginBody = {
     username: loginExpected.happy.loginName,
-    password: "12345678",
+       password: loginExpected.happy.password,
   };
 
   // Test data
   const validEmployeeCode = loginExpected.happy.loginName;
   const validCompanyId = 1;
-  const invalidEmployeeCode = "INVALID-999-fabhrdemo.in";
   const invalidCompanyId = 999;
 
   test.beforeEach("Get authentication token", async ({ request }) => {
-    const loginPage = new LoginPage();
+     loginPage = new LoginPage();
     const loginResp = await loginPage.loginAs(request, loginBody);
     token = loginResp.body.token;
     expect(token).toBeTruthy();
   });
 
-  test("Get punch time details - Happy flow", async ({ request }) => {
+  test("Get punch time details - Happy flow  @happy @medium", async ({ request }) => {
     const punchTime = new PunchTime();
 
     const response = await punchTime.getPunchTimeDetails(
@@ -37,7 +34,7 @@ test.describe("Punch Time Details GET API", () => {
     );
     // Basic response validation
     expect(response).toBeTruthy();
-    expect(response.status).toBe(200);
+    ExpectResponse.okResponse(response.status);
     expect(response.body).toBeTruthy();
 
     // Validate response structure
@@ -72,7 +69,7 @@ test.describe("Punch Time Details GET API", () => {
       }
     }
   });
-  test("Get punch time details - Without username header", async ({
+  test("Get punch time details - Without username header @negative @medium", async ({
     request,
   }) => {
     const punchTime = new PunchTime();
@@ -101,7 +98,7 @@ test.describe("Punch Time Details GET API", () => {
     }
   });
 
-  test("Get punch time details - Invalid company ID", async ({ request }) => {
+  test("Get punch time details - Invalid company ID @negative @medium", async ({ request }) => {
     const punchTime = new PunchTime();
 
     const response = await punchTime.getPunchTimeDetailsWithInvalidCompany(
@@ -113,7 +110,7 @@ test.describe("Punch Time Details GET API", () => {
 
     // Should return 200 status code with null values for invalid company ID
     expect(response).toBeTruthy();
-    expect(response.status).toBe(200);
+    ExpectResponse.okResponse(response.status);
     expect(response.body).toBeTruthy();
 
     // Validate response structure with null values
@@ -138,7 +135,7 @@ test.describe("Punch Time Details GET API", () => {
     }
   });
 
-  test("Get punch time details - Response time validation", async ({
+  test("Get punch time details - Response time validation @happy @medium", async ({
     request,
   }) => {
     const punchTime = new PunchTime();
@@ -158,11 +155,11 @@ test.describe("Punch Time Details GET API", () => {
 
     // Basic response validation
     expect(response).toBeTruthy();
-    expect(response.status).toBe(200);
+    ExpectResponse.okResponse(response.status);
     expect(response.body).toBeTruthy();
   });
 
-  test("Get punch time details - Response content type validation", async ({
+  test("Get punch time details - Response content type validation @happy @medium", async ({
     request,
   }) => {
     const punchTime = new PunchTime();
@@ -176,7 +173,7 @@ test.describe("Punch Time Details GET API", () => {
 
     // Validate response
     expect(response).toBeTruthy();
-    expect(response.status).toBe(200);
+   ExpectResponse.okResponse(response.status);
     expect(response.body).toBeTruthy();
 
     // Validate that response body is an object (JSON)
@@ -184,7 +181,7 @@ test.describe("Punch Time Details GET API", () => {
     expect(Array.isArray(response.body)).toBe(false);
   });
 
-  test("Get punch time details - Multiple requests consistency", async ({
+  test("Get punch time details - Multiple requests consistency @happy @medium", async ({
     request,
   }) => {
     const punchTime = new PunchTime();
@@ -203,7 +200,7 @@ test.describe("Punch Time Details GET API", () => {
 
     // All responses should be successful
     responses.forEach((response, index) => {
-      expect(response.status).toBe(200);
+      ExpectResponse.okResponse(response.status);
       expect(response.body).toBeTruthy();
     });
 

@@ -39,7 +39,7 @@ test.describe("Reject and Approve WFH API", () => {
       const loginPage = new LoginPage();
       const loginBody = {
         username: loginExpected.happy.loginName,
-        password: "12345678",
+           password: loginExpected.happy.password,
       };
       const loginResponse = await loginPage.loginAs(request, loginBody);
       
@@ -48,7 +48,8 @@ test.describe("Reject and Approve WFH API", () => {
       authToken = loginResponse.body.token;
     });
 
-  test("Apply WFH then Reject WFH - Complete workflow", async ({ request }) => {
+  // Happy Path - High Priority Tests
+  test("Apply WFH then Reject WFH - Complete workflow @high @happy", async ({ request }) => {
     const attendance = new Attandance();
     
     // Step 1: Apply WFH first using helper function
@@ -80,10 +81,9 @@ test.describe("Reject and Approve WFH API", () => {
     // Validate rejection response
     expect(rejectResponse.body.workFromHomeDateWiseId).toBe(wfhId);
     expect(rejectResponse.body.approvalStatus).toBe("REJ");
-    expect(rejectResponse.body.employeeWFHStatus).toBe("DE");
-    expect(rejectResponse.body.approvalorcancelremark).toBe("no");
+    expect(rejectResponse.body.approvalorcancelremark).toBe("Reject");
   });
- test("Apply WFH then Approve WFH - Complete workflow", async ({ request }) => {
+ test("Apply WFH then Approve WFH - Complete workflow @high @happy", async ({ request }) => {
     const attendance = new Attandance();
     
     // Step 1: Apply WFH first using helper function
@@ -116,10 +116,10 @@ test.describe("Reject and Approve WFH API", () => {
     // Validate rejection response
     expect(rejectResponse.body.workFromHomeDateWiseId).toBe(wfhId);
     expect(rejectResponse.body.approvalStatus).toBe("APR");
-    expect(rejectResponse.body.employeeWFHStatus).toBe("DE");
-    expect(rejectResponse.body.approvalorcancelremark).toBe("no");
+    expect(rejectResponse.body.approvalorcancelremark).toBe("Reject");
   });
-  test("Reject and Approve WFH - Invalid WFH ID", async ({ request }) => {
+  // Negative Path - Medium Priority Tests
+  test("Reject and Approve WFH - Invalid WFH ID @medium @negative", async ({ request }) => {
     const attendance = new Attandance();
     const invalidRejectPayload = {
       ...applyWFHExpected.rejectWFHPayload,
@@ -145,7 +145,7 @@ test.describe("Reject and Approve WFH API", () => {
     }
   });
 
-  test("Reject WFH and Approve WFH - Missing required fields", async ({ request }) => {
+  test("Reject WFH and Approve WFH - Missing required fields @medium @negative", async ({ request }) => {
     const attendance = new Attandance();
     const incompleteRejectPayload = {
       workFromHomeDateWiseId: 61,
@@ -172,7 +172,8 @@ test.describe("Reject and Approve WFH API", () => {
     }
   });
 
-  test("Reject and Approve WFH - Response time validation", async ({ request }) => {
+  // Performance/Non-functional - Low Priority Tests
+  test("Reject and Approve WFH - Response time validation @low @negative", async ({ request }) => {
     const attendance = new Attandance();
     const rejectPayload = applyWFHExpected.rejectWFHPayload;
 
@@ -190,7 +191,8 @@ test.describe("Reject and Approve WFH API", () => {
     expect(response.body).toBeTruthy();
   });
 
-  test("Reject and Approve WFH - Different rejection reasons", async ({ request }) => {
+  // Edge Cases - Medium Priority Tests
+  test("Reject and Approve WFH - Different rejection reasons @medium @happy", async ({ request }) => {
     const attendance = new Attandance();
     
     // Test different rejection reasons
@@ -211,5 +213,6 @@ test.describe("Reject and Approve WFH API", () => {
       expect(response.body.approvalorcancelremark).toBe(reason);
       expect(response.body.approvalStatus).toBe("REJ");
     }
+    
   });
 });

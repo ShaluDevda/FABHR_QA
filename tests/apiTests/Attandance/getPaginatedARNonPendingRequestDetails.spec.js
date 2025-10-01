@@ -5,26 +5,27 @@ import getPaginatedARPendingRequestDetailsExpected from "../../fixtures/Response
 import applyARExpected from "../../fixtures/Response/applyARExpected.json" assert { type: "json" };
 import loginExpected from "../../fixtures/Response/loginExpected.json" assert { type: "json" };
 
-test.describe("Get Paginated AR Pending Request Details API", () => {
-  let authToken;
-  let attendance;
+test.describe("POST| -/ hrmsApi/attendanceregularizationrequest/getPaginatedARPendingRequestDetails/emp/71/Nonpending, Get Paginated AR non Pending Request Details API", () => {
+  let authToken, loginBody, loginPage;
+  let attendance = new Attandance();
+  
 
   test.beforeEach(async ({ request }) => {
     // Login to get authentication token
-    const loginPage = new LoginPage();
-    const loginBody = {
+     loginPage = new LoginPage();
+     loginBody = {
       username: loginExpected.happy.loginName,
-      password: "12345678",
+         password: loginExpected.happy.password,
     };
     
     const loginResponse = await loginPage.loginAs(request, loginBody);
     expect(loginResponse.status).toBe(200);
     expect(loginResponse.token).toBeTruthy();
     authToken = loginResponse.token;
-    attendance = new Attandance();
+    
   });
 
-  test("Get Paginated AR Pending Request Details - Success scenario", async ({ request }) => {
+  test("Get Paginated AR Non Pending Request Details - Success scenario @happy @high", async ({ request }) => {
     const response = await attendance.getPaginatedARNonPendingRequestDetails(
       request, 
       getPaginatedARPendingRequestDetailsExpected.baseRequestBody, 
@@ -45,7 +46,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     expect(typeof responseBody.totalPages).toBe("number");
   });
 
-  test("Get Paginated AR Pending Request Details - Verify AR entry appears after successful application", async ({ request }) => {
+  test(" Get Paginated AR Non Pending(completed) Request Details - Verify AR entry appears after successful application @hapy @high", async ({ request }) => {
     // First, get initial count of pending AR requests
     const initialResponse = await attendance.getPaginatedARNonPendingRequestDetails(
       request, 
@@ -94,7 +95,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     }
   });
 
-  test("Get Paginated AR Pending Request Details - Invalid pagination parameters", async ({ request }) => {
+  test("Get Paginated AR NONPending(completed) Request Details - Invalid pagination parameters @negative @medium", async ({ request }) => {
     const invalidRequestBody = {
       ...getPaginatedARPendingRequestDetailsExpected.baseRequestBody,
       currentPage: -1, // Invalid negative page
@@ -114,7 +115,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     expect(response.body.message).toBe("Bad Request");
   });
 
-  test("Get Paginated AR Pending Request Details - Without authentication token", async ({ request }) => {
+  test("Get Paginated AR NONPending(completed) Request Details - Without authentication token @negative @medium", async ({ request }) => {
     const response = await attendance.getPaginatedARNonPendingRequestDetails(
       request, 
       getPaginatedARPendingRequestDetailsExpected.baseRequestBody
@@ -126,7 +127,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     expect(response.status).not.toBe(200);
   });
 
-  test("Get Paginated AR Pending Request Details - Different page sizes", async ({ request }) => {
+  test("Get Paginated AR NONPending(completed) Request Details - Different page sizes @medium @happy", async ({ request }) => {
     const testCases = [
       { itemPerPage: 1, expectedMaxItems: 1 },
       { itemPerPage: 10, expectedMaxItems: 10 },
@@ -153,7 +154,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     }
   });
 
-  test("Get Paginated AR Pending Request Details - All sorting scenarios", async ({ request }) => {
+  test("Get Paginated AR NONPending(completed) Request Details - All sorting scenarios @medium @happy", async ({ request }) => {
     const sortingTestCases = getPaginatedARPendingRequestDetailsExpected.sortingTestCases;
     
     for (const testCase of sortingTestCases) {
@@ -189,7 +190,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     }
   });
 
-  test("Get Paginated AR Pending Request Details - Sort by all fields with ASC and DESC", async ({ request }) => {
+  test("Get Paginated AR NONPending(completed) Request Details - Sort by all fields with ASC and DESC @medium @happy", async ({ request }) => {
     const sortFields = ["requestOn", "reason", "date", "days", "name", "department", "attendanceDays"];
     const sortDirections = ["ASC", "DESC"];
     

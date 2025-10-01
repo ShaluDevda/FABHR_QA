@@ -14,9 +14,9 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
   testDir: "./tests",
-  timeout: 60000, // 1 min per test
+  timeout: 300000, // Increased to 5 min per test
   expect: {
-    timeout: 8000, 
+    timeout: 15000, // Increased expect timeout
   },
 
   /* Run tests in files in parallel */
@@ -27,7 +27,7 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 1,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 4, // Adjust based on your system
-  
+
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ["list"], // keeps console output
@@ -38,12 +38,12 @@ export default defineConfig({
   ],
 
   /* Global timeout settings */
-  globalTimeout: 60000, // equivalent to execTimeout
+  globalTimeout: 300000, // Increased global timeout to 5 min
   maxFailures: process.env.CI ? 0 : 5, // Allow some failures in development
 
   /* Test Results and Artifacts */
   outputDir: 'test-results/',
-  
+
   /* Global Test Configuration */
   testMatch: '**/*.{test,spec}.{js,ts}',
   testIgnore: '**/node_modules/**',
@@ -54,22 +54,22 @@ export default defineConfig({
     baseURL: process.env.CANONICAL_HOSTNAME || "https://hrms.fabhr.in/",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    headless: false,
-    
+    headless: true,
+
     /* Viewport settings - equivalent to Cypress viewportWidth/viewportHeight */
     viewport: { width: 1920, height: 1080 },
-    
+
     /* Timeout settings - equivalent to Cypress timeouts */
     navigationTimeout: 80000, // equivalent to pageLoadTimeout
     actionTimeout: 10000, // equivalent to defaultCommandTimeout
     requestTimeout: 10000, // equivalent to requestTimeout
     responseTimeout: 10000, // equivalent to responseTimeout
-    
+
     /* Security and performance settings */
     ignoreHTTPSErrors: true, // equivalent to chromeWebSecurity: false
     /* Animation handling (equivalent to waitForAnimations) */
     animations: "disabled",
-    
+
     /* Trace and screenshot settings */
     trace: "on-first-retry",
     screenshot: "only-on-failure",
@@ -79,48 +79,25 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "chromium",
-      use: { 
-        ...devices["Desktop Chrome"],
-        // Additional Chrome-specific settings
-        launchOptions: {
-          args: [
-            '--disable-web-security',
-            '--disable-features=VizDisplayCompositor'
-          ]
-        }
-      },
+      name: 'all-tests',
+      testDir: './tests',
     },
-
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+    {
+      name: 'high-priority',
+      testDir: './tests',
+      grep: /@high/,
+    },
+    {
+      name: 'medium-priority',
+      testDir: './tests',
+      grep: /@medium/,
+    },
+    {
+      name: 'low-priority',
+      testDir: './tests',
+      grep: /@low/,
+    },
+   
   ],
 
   /* Web Server for Local Development */

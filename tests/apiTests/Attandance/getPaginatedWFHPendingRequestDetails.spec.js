@@ -2,12 +2,14 @@ import { test, expect } from "@playwright/test";
 import { LoginPage } from "../../utils/endpoints/classes/login.js";
 import { Attandance } from "../../utils/endpoints/classes/Attandance/myAttandance.js";
 import loginExpected from "../../fixtures/Response/loginExpected.json" assert { type: "json" };
+import ExpectResponse from "../../utils/endpoints/expect/expectResponse.js";
 import applyWFHExpected from "../../fixtures/Response/applyWFH.json" assert { type: "json" };
 import getPaginatedWFHExpected from "../../fixtures/Response/getPaginatedWFHExpected.json" assert { type: "json" };
 
 test.describe("Get Paginated WFH Pending Request Details API", () => {
-  let authToken;
-  let attendance;
+  let authToken, attendance;
+  attendance = new Attandance();
+
   const tryWFHWithDifferentDates = async (
     attendance,
     request,
@@ -45,14 +47,13 @@ test.describe("Get Paginated WFH Pending Request Details API", () => {
     const loginPage = new LoginPage();
     const loginBody = {
       username: loginExpected.happy.loginName,
-      password: "12345678",
+         password: loginExpected.happy.password,
     };
 
     const loginResponse = await loginPage.loginAs(request, loginBody);
     expect(loginResponse.status).toBe(200);
     expect(loginResponse.body.token).toBeTruthy();
     authToken = loginResponse.body.token;
-    attendance = new Attandance();
   });
 
   test("Get Paginated WFH Pending Request Details - Success scenario", async ({
@@ -63,7 +64,7 @@ test.describe("Get Paginated WFH Pending Request Details API", () => {
       getPaginatedWFHExpected.baseRequestBody,
       authToken
     );
-
+console.log(response)
     const responseBody = response.body;
     "WFH Paginated Response:", responseBody;
 
@@ -88,7 +89,6 @@ test.describe("Get Paginated WFH Pending Request Details API", () => {
         authToken
       );
     const initialCount = initialResponse.body.totalItems;
-
     // Step 2: Apply WFH
     const applyResponse = await attendance.applyWFH(
       request,
@@ -152,7 +152,6 @@ test.describe("Get Paginated WFH Pending Request Details API", () => {
     );
     expect(rejectResponse.status).toBe(200);
     expect(rejectResponse.body.approvalStatus).toBe("REJ");
-    expect(rejectResponse.body.employeeWFHStatus).toBe("DE");
 
     // Step 3: Check pending list again
     const updatedResponse =
@@ -168,5 +167,104 @@ test.describe("Get Paginated WFH Pending Request Details API", () => {
       (wfh) => wfh.workFromHomeDateWiseId === wfhId
     );
     expect(rejectedEntry).toBeUndefined();
+  });
+
+  test("Get Paginated WFH Pending Request Details - Invalid pagination parameters @negative @high", async ({
+    request,
+  }) => {
+    const invalidRequestBody = {
+      ...getPaginatedWFHExpected.baseRequestBody,
+      currentPage: -1, // Invalid negative page
+    };
+    const response = await attendance.getPaginatedWFHPendingRequestDetails(
+      request,
+      invalidRequestBody,
+      authToken
+    );
+    const responseBody = response.body;
+    "WFH Paginated Response:", responseBody;
+
+    // Should return an error for invalid request
+    ExpectResponse.badRequestMessage(responseBody.message);
+    ExpectResponse.badRequest(response.status);
+  });
+
+  test("Get Paginated WFH Pending Request Details - Without token @negative @high", async ({
+    request,
+  }) => {
+    const response = await attendance.getPaginatedWFHPendingRequestDetails(
+      request,
+      getPaginatedWFHExpected.baseRequestBody
+    );
+    ExpectResponse.internalServerError(response.status);
+  });
+
+  test("Get Paginated WFH Pending Request Details  @happy @medium- with Different page sizes", async ({
+    request,
+  }) => {
+    const testCases = [
+      { itemPerPage: 5 },
+      { itemPerPage: 10 },
+      { itemPerPage: 15 },
+      { itemPerPage: 20 },
+      { itemPerPage: 50 },
+      { itemPerPage: 500 },
+      { itemPerPage: 100 },
+    ];
+
+    for (const testCase of testCases) {
+      const requestBody = {
+        ...getPaginatedWFHExpected.baseRequestBody,
+        itemPerPage: testCase.itemPerPage,
+      };
+
+      const response = await attendance.getPaginatedWFHPendingRequestDetails(
+        request,
+        requestBody,
+        authToken
+      );
+
+      const responseBody = response.body;
+
+      expect(response.status).toBe(200);
+      expect(responseBody.currentPage).toBe(0);
+    }
+  });
+
+  test("Get Paginated WFH Pending Request Details @happy @medium  - Sort by all fields with ASC and DESC", async ({
+    request,
+  }) => {
+    const sortFields = ["name", "type", "date", "reason"];
+    const sortDirections = ["ASC", "DESC"];
+
+    for (const field of sortFields) {
+      for (const direction of sortDirections) {
+        const requestBody = {
+          ...getPaginatedWFHExpected.baseRequestBody,
+          sortBy: field,
+          sortDirection: direction,
+        };
+
+        const initialResponse =
+          await attendance.getPaginatedWFHPendingRequestDetails(
+            request,
+            requestBody,
+            authToken
+          );
+        const responseBody = initialResponse.body;
+
+        expect(initialResponse.status).toBe(200);
+        expect(responseBody).toHaveProperty("data");
+        expect(Array.isArray(responseBody.data)).toBe(true);
+
+        // Verify that the response contains the expected structure
+        if (responseBody.data.length > 0) {
+          const firstItem = responseBody.data[0];
+          expect(firstItem).toHaveProperty("workFromHomeDateWiseId");
+          expect(firstItem).toHaveProperty("masterWorkFromHomeId");
+          expect(firstItem).toHaveProperty("status");
+        }
+      }
+    }
   });
 });

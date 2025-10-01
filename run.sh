@@ -20,3 +20,12 @@ node utils/uploadReport.js
 # Notify Slack
 echo "Sending Slack notification..."
 node utils/slackNotification.js
+
+# Run only high priority tests
+npx playwright test --project=high-priority
+
+# Run high and medium priority tests
+npx playwright test --project=high-priority,medium-priority
+
+# Run all tests
+npx playwright test

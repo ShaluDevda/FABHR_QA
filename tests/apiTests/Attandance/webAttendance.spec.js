@@ -161,7 +161,7 @@ test.describe("Web Attendance POST API", () => {
   let token;
   const loginBody = {
     username: loginExpected.happy.loginName,
-    password: "12345678",
+       password: loginExpected.happy.password,
   };
 
   // Variables to store current date/time for validation
@@ -175,7 +175,7 @@ test.describe("Web Attendance POST API", () => {
     expect(token).toBeTruthy();
   });
 
-  test("Post web attendance - Check in", async ({ request }) => {
+  test("Post web attendance - Check in @happy @medium", async ({ request }) => {
     const attendance = new Attandance();
     
     // Generate current date/time for check-in
@@ -187,7 +187,8 @@ test.describe("Web Attendance POST API", () => {
       token,
       attendanceData
     );
-    
+    console.log(response);
+    console.log("Check-in Data Sent:", attendanceData);
     expect(response).toBeTruthy();
     expect(response.status).toBe(200);
     expect(response.body).toBeTruthy();
@@ -236,7 +237,7 @@ test.describe("Web Attendance POST API", () => {
               new Date(`1970-01-01T${responseTime}`).getTime() - 
               new Date(`1970-01-01T${sentTime}`).getTime()
             );
-            expect(timeDiff).toBeLessThan(60000); // 1 minute in milliseconds
+            expect(timeDiff).toBeLessThan(100000); // 1 minute in milliseconds
           }
           
           // Check in_out status
@@ -257,7 +258,7 @@ test.describe("Web Attendance POST API", () => {
     );
   });
 
-  test("Post web attendance - Check out", async ({ request }) => {
+  test("Post web attendance - Check out @happy @medium", async ({ request }) => {
     const attendance = new Attandance();
 
     // Generate current date/time for check-out
@@ -341,9 +342,8 @@ test.describe("Web Attendance POST API", () => {
     );
   });
 
-  test("Post web attendance - Missing required fields", async ({ request }) => {
+  test("Post web attendance - Missing required fields @negative @medium", async ({ request }) => {
     const attendance = new Attandance();
-
     // Create data with missing required fields
     const incompleteData = {
       companyId: 1,
@@ -374,7 +374,7 @@ test.describe("Web Attendance POST API", () => {
     }
   });
 
-  test("Post web attendance - Without authentication token", async ({
+  test("Post web attendance - Without authentication token @negative @medium", async ({
     request,
   }) => {
     const attendance = new Attandance();

@@ -1,8 +1,8 @@
 {
   "requestBody": {
     "reasonSelect": "OT",
-    "fromDate": "2025-04-11T05:32:11.000Z",
-    "toDate": "2025-04-11T05:32:11.000Z",
+    "fromDate": "2025-12-12T05:32:11.000Z",
+    "toDate": "2025-12-12T05:32:11.000Z",
     "days": null,
     "workfromhometype": "SD",
     "employeeRemark": "test",
@@ -58,10 +58,10 @@
     "approvalByEmpDesignation": null,
     "approvalByEmpName": null,
     "approvalId": 368,
-    "approvalStatus": "REJ",
-    "approvalorcancelremark": "no",
-    "charFirstName": "R",
-    "charLastName": "S",
+    "approvalStatus": "PEN",
+    "approvalorcancelremark": "Reject",
+    "charFirstName": "Rajesh",
+    "charLastName": "Sharma",
     "cityName": null,
     "companyId": 1,
     "dateCreated": 1758047400000,
@@ -76,7 +76,7 @@
     "employeeLogoPath": "tenantsFile/fabhrdemo/Document/CompanyAssets/20250821_120218_image (1).png",
     "employeeName": "Rajesh Sharma",
     "employeeRemark": "test",
-    "employeeWFHStatus": "DE",
+    "employeeWFHStatus": null,
     "fromDate": 1756751400000,
     "hybridDays": null,
     "masterWorkFromHomeId": 1,
@@ -174,17 +174,26 @@
     "workfromhometype": "HY",
     "workfromhometypeshortname": "HY"
   },
-"hybridWFHSuccessPayload": {
-"companyId": 1,
-"days": null,
-"employeeId": 567,
-"employeeRemark": "testing",
-"fromDate": null,
-"reasonSelect": "ME",
-"status": "PEN",
-"toDate": null,
-"userId": 565,
-"userIdUpdate": 565,
-"workfromhometype": "HY"
+  "hybridWFHSuccessPayload": {
+    "companyId": 1,
+    "days": null,
+    "employeeId": 567,
+    "employeeRemark": "testing",
+    "fromDate": null,
+    "reasonSelect": "ME",
+    "status": "PEN",
+    "toDate": null,
+    "userId": 565,
+    "userIdUpdate": 565,
+    "workfromhometype": "HY"
+  },
+  "deactiveFlagEmployeeWisePayload": {
+    "deactiveDate": null,
+    "deactiveRemark": "test",
+    "employeeWFHStatus": "DE",
+    "updatedDate": null,
+    "userIdUpdate": null,
+    "workFromHomeDateWiseId": null,
+    "workfromhometypeshortname": ["HY", "SD"]
   }
 }

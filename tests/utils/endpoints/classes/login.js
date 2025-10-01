@@ -1,11 +1,11 @@
-import endpoints from "../../../fixtures/endpoints.json" assert { type: "json" };
+import endpoints from "../../../fixtures/Endpoints/commonEndpoint.json" assert { type: "json" };
 import inputsData from "../../../fixtures/inputs.json" assert { type: "json" };
 
 export class LoginPage {
   constructor() {
     this.token = null;
   }
-  async   loginAs(apiContext, loginBody) {
+  async  loginAs(apiContext, loginBody) {
     // const loginParams = new URLSearchParams(loginBody);
     const response = await apiContext.post(endpoints.login, {
       data: loginBody, // Automatically sets application/json

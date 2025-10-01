@@ -12,7 +12,7 @@ test.describe("Apply AR (Attendance Regularization) API", () => {
     const loginPage = new LoginPage();
     const loginBody = {
       username: loginExpected.happy.loginName,
-      password: "12345678",
+         password: loginExpected.happy.password,
     };
 
     const loginResponse = await loginPage.loginAs(request, loginBody);
@@ -21,11 +21,13 @@ test.describe("Apply AR (Attendance Regularization) API", () => {
     authToken = loginResponse.token;
   });
 
-  test.only("Apply AR and Reject-  Success scenario  @happy", async ({ request }) => {
+  test("Apply AR and Reject-  Success scenario  @happy", async ({ request }) => {
+    // @priority: high
+    // @happy
     const attendance = new Attandance();
     let response;
     let attempts = 0;
-    const maxAttempts = 29;
+    const maxAttempts = 60;
     do {
        // Generate a new date for each attempt (today + attempts days)
     const date = new Date();
@@ -44,9 +46,8 @@ test.describe("Apply AR (Attendance Regularization) API", () => {
       await new Promise(res => setTimeout(res, 500));
     } while (response.status !== 200 && attempts < maxAttempts);
 
-    console.log(response);
     const responseBody = response.body;
-
+ console.log(responseBody);
     // Assert only if we got a 200, else fail
     expect(response.status).toBe(200);
   //reject AR payload
@@ -68,9 +69,7 @@ test.describe("Apply AR (Attendance Regularization) API", () => {
     employeeId: responseBody.data.employeeId
   }
     //reject AR
- console.log("rejectsdfghjk"+ JSON.stringify(Payload));
    let rejectResponse = await attendance.applyAR(request,Payload, authToken);
-   console.log(rejectResponse);
    expect(rejectResponse.status).toBe(200);
    expect(rejectResponse.body.statusCode).toBe(200);
    expect(rejectResponse.body.isSuccess).toBe(true);
@@ -92,7 +91,6 @@ test.describe("Apply AR (Attendance Regularization) API", () => {
       fromDate: isoDate,
       toDate: isoDate
     };
-      console.log(dynamicPayload)
       response = await attendance.applyAR(request, dynamicPayload, authToken);
       attempts++;
       if (response.status === 200) break;
@@ -100,7 +98,6 @@ test.describe("Apply AR (Attendance Regularization) API", () => {
       await new Promise(res => setTimeout(res, 500));
     } while (response.status !== 200 && attempts < maxAttempts);
 
-    console.log(response);
     const responseBody = response.body;
 
     // Assert only if we got a 200, else fail
@@ -124,15 +121,80 @@ test.describe("Apply AR (Attendance Regularization) API", () => {
     employeeId: responseBody.data.employeeId
   }
     //Approval AR
- console.log("approve"+ JSON.stringify(Payload));
    let rejectResponse = await attendance.applyAR(request,Payload, authToken);
-   console.log(rejectResponse);
    expect(rejectResponse.status).toBe(200);
    expect(rejectResponse.body.statusCode).toBe(200);
    expect(rejectResponse.body.isSuccess).toBe(true);
    expect(rejectResponse.body.message).toBe("Data Found Successfully");
   });
 
+  test("Apply AR and Approve and than cancel -  Success scenario  @happy @medium", async ({ request }) => {
+   // @priority: medium
+   // @happy
+    const attendance = new Attandance();
+    let response;
+    let attempts = 0;
+    const maxAttempts = 30;
+    do {
+       // Generate a new date for each attempt (today + attempts days)
+    const date = new Date();
+    date.setDate(date.getDate() + attempts);
+    date.setHours(0, 0, 0, 0);
+    const isoDate = date.toISOString();
+    const dynamicPayload = {
+      ...applyARExpected.requestBody,
+      fromDate: isoDate,
+      toDate: isoDate
+    };
+      response = await attendance.applyAR(request, dynamicPayload, authToken);
+      attempts++;
+      if (response.status === 200) break;
+      // Optional: wait a bit before retrying
+      await new Promise(res => setTimeout(res, 500));
+    } while (response.status !== 200 && attempts < maxAttempts);
+
+    const responseBody = response.body;
+    // Assert only if we got a 200, else fail
+    expect(response.status).toBe(200);
+  //reject AR payload
+ const Payload={
+    ...rejectPayload.rejectApproveAr,
+    arID: responseBody.data.arID,
+    arCategory: responseBody.data.arCategory,
+    days: responseBody.data.days,
+    fromDate: responseBody.data.fromDate,
+    toDate: responseBody.data.toDate,
+    employeeRemark: responseBody.data.employeeRemark,
+    status: "APR",
+    reviewerRemark: "Approve for testing purpose",
+    approvalId: responseBody.data.approvalId,
+    companyId: responseBody.data.companyId,
+    companyIdUpdate: responseBody.data.companyIdUpdate,
+    userIdUpdate: responseBody.data.userIdUpdate,
+    userId: responseBody.data.userId,
+    employeeId: responseBody.data.employeeId
+  }
+    //Approval AR
+   let rejectResponse = await attendance.applyAR(request,Payload, authToken);
+   expect(rejectResponse.status).toBe(200);
+   expect(rejectResponse.body.statusCode).toBe(200);
+   expect(rejectResponse.body.isSuccess).toBe(true);
+   expect(rejectResponse.body.message).toBe("Data Found Successfully");
+
+   //cancel AR payload
+   let cancelPayload={
+    ...Payload,
+    status: "CAN",
+    statusValue:"Approved"
+   }
+      let cancelResponse = await attendance.applyAR(request,cancelPayload, authToken);
+      expect(cancelResponse.status).toBe(200);
+      expect(cancelResponse.body.statusCode).toBe(200);
+      expect(cancelResponse.body.isSuccess).toBe(true);
+      expect(cancelResponse.body.message).toBe("Data Found Successfully");
+      expect(cancelResponse.body.data.status).toBe("CAN");
+
+  });
  
 
 

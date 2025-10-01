@@ -10,7 +10,7 @@
     "test:api": "npx playwright test tests/api",
     "test:happy": "npx playwright test --grep '@happy'",
     "test:negative": "npx playwright test --grep '@negative'",
-    "report:allure": "allure generate allure-results --clean -o allure-report && allure open allure-report",
+    "report:allure": "allure generate allure-results -o allure-report --clean && allure open allure-report",
     "report:html": "npx playwright show-report",
     "upload-report": "node utils/uploadReport.js",
     "slack-notify": "node utils/slackNotification.js"

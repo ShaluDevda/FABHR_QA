@@ -1,1 +1,6 @@
-{"fieldRequired": "This field is required."}
+{
+  "invalidAccess": "Invalid Access!!, Authentication Required",
+  "inCorrectUsername": "You have entered incorrect username.",
+  "fieldRequired": "This field is required.",
+  "badRequest": "Bad Request"
+}

@@ -13,7 +13,7 @@ test.describe("Work From Home Hybrid Request API", () => {
     const loginPage = new LoginPage();
     const loginBody = {
       username: loginExpected.happy.loginName,
-      password: "12345678",
+         password: loginExpected.happy.password,
     };
     const loginResponse = await loginPage.loginAs(request, loginBody);
 
@@ -22,7 +22,7 @@ test.describe("Work From Home Hybrid Request API", () => {
     authToken = loginResponse.body.token;
   });
 
-  test("Get Employee list - Happy flow @happy", async ({ request }) => {
+  test("Get Employee list - Happy flow @happy @medium", async ({ request }) => {
     const attendance = new Attandance();
     response = await attendance.getEmployeeList(request, authToken);
     expect(response).toBeTruthy();
@@ -45,10 +45,6 @@ test.describe("Work From Home Hybrid Request API", () => {
     }
 
     const allEmployeeList = extractEmployeeList(response.body);
-    console.log(
-      "All Employee List Names:",
-      allEmployeeList,
-      allEmployeeList.length
-    );
+   
   });
 });
