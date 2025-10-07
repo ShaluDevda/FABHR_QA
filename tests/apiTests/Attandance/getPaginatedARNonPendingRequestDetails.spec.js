@@ -25,7 +25,7 @@ test.describe("POST| -/ hrmsApi/attendanceregularizationrequest/getPaginatedARPe
     
   });
 
-  test("Get Paginated AR Non Pending Request Details - Success scenario @happy @high", async ({ request }) => {
+  test("Get Paginated AR Non Pending Request Details - Success scenario @happy", async ({ request }) => {
     const response = await attendance.getPaginatedARNonPendingRequestDetails(
       request, 
       getPaginatedARPendingRequestDetailsExpected.baseRequestBody, 
@@ -46,7 +46,7 @@ test.describe("POST| -/ hrmsApi/attendanceregularizationrequest/getPaginatedARPe
     expect(typeof responseBody.totalPages).toBe("number");
   });
 
-  test(" Get Paginated AR Non Pending(completed) Request Details - Verify AR entry appears after successful application @hapy @high", async ({ request }) => {
+  test(" Get Paginated AR Non Pending(completed) Request Details - Verify AR entry appears after successful application @happy", async ({ request }) => {
     // First, get initial count of pending AR requests
     const initialResponse = await attendance.getPaginatedARNonPendingRequestDetails(
       request, 
@@ -95,7 +95,7 @@ test.describe("POST| -/ hrmsApi/attendanceregularizationrequest/getPaginatedARPe
     }
   });
 
-  test("Get Paginated AR NONPending(completed) Request Details - Invalid pagination parameters @negative @medium", async ({ request }) => {
+  test("Get Paginated AR NONPending(completed) Request Details - Invalid pagination parameters @negative", async ({ request }) => {
     const invalidRequestBody = {
       ...getPaginatedARPendingRequestDetailsExpected.baseRequestBody,
       currentPage: -1, // Invalid negative page
@@ -115,7 +115,7 @@ test.describe("POST| -/ hrmsApi/attendanceregularizationrequest/getPaginatedARPe
     expect(response.body.message).toBe("Bad Request");
   });
 
-  test("Get Paginated AR NONPending(completed) Request Details - Without authentication token @negative @medium", async ({ request }) => {
+  test("Get Paginated AR NONPending(completed) Request Details - Without authentication token @negative ", async ({ request }) => {
     const response = await attendance.getPaginatedARNonPendingRequestDetails(
       request, 
       getPaginatedARPendingRequestDetailsExpected.baseRequestBody
@@ -127,7 +127,7 @@ test.describe("POST| -/ hrmsApi/attendanceregularizationrequest/getPaginatedARPe
     expect(response.status).not.toBe(200);
   });
 
-  test("Get Paginated AR NONPending(completed) Request Details - Different page sizes @medium @happy", async ({ request }) => {
+  test("Get Paginated AR NONPending(completed) Request Details - Different page sizes  @happy", async ({ request }) => {
     const testCases = [
       { itemPerPage: 1, expectedMaxItems: 1 },
       { itemPerPage: 10, expectedMaxItems: 10 },
@@ -154,7 +154,7 @@ test.describe("POST| -/ hrmsApi/attendanceregularizationrequest/getPaginatedARPe
     }
   });
 
-  test("Get Paginated AR NONPending(completed) Request Details - All sorting scenarios @medium @happy", async ({ request }) => {
+  test("Get Paginated AR NONPending(completed) Request Details - All sorting scenarios  @happy", async ({ request }) => {
     const sortingTestCases = getPaginatedARPendingRequestDetailsExpected.sortingTestCases;
     
     for (const testCase of sortingTestCases) {
@@ -190,7 +190,7 @@ test.describe("POST| -/ hrmsApi/attendanceregularizationrequest/getPaginatedARPe
     }
   });
 
-  test("Get Paginated AR NONPending(completed) Request Details - Sort by all fields with ASC and DESC @medium @happy", async ({ request }) => {
+  test("Get Paginated AR NONPending(completed) Request Details - Sort by all fields with ASC and DESC  @happy", async ({ request }) => {
     const sortFields = ["requestOn", "reason", "date", "days", "name", "department", "attendanceDays"];
     const sortDirections = ["ASC", "DESC"];
     

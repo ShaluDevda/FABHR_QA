@@ -169,7 +169,7 @@ console.log(response)
     expect(rejectedEntry).toBeUndefined();
   });
 
-  test("Get Paginated WFH Pending Request Details - Invalid pagination parameters @negative @high", async ({
+  test("Get Paginated WFH Pending Request Details - Invalid pagination parameters @negative", async ({
     request,
   }) => {
     const invalidRequestBody = {
@@ -189,7 +189,7 @@ console.log(response)
     ExpectResponse.badRequest(response.status);
   });
 
-  test("Get Paginated WFH Pending Request Details - Without token @negative @high", async ({
+  test("Get Paginated WFH Pending Request Details - Without token @negative", async ({
     request,
   }) => {
     const response = await attendance.getPaginatedWFHPendingRequestDetails(
@@ -199,7 +199,7 @@ console.log(response)
     ExpectResponse.internalServerError(response.status);
   });
 
-  test("Get Paginated WFH Pending Request Details  @happy @medium- with Different page sizes", async ({
+  test("Get Paginated WFH Pending Request Details  @happy- with Different page sizes", async ({
     request,
   }) => {
     const testCases = [
@@ -231,7 +231,7 @@ console.log(response)
     }
   });
 
-  test("Get Paginated WFH Pending Request Details @happy @medium  - Sort by all fields with ASC and DESC", async ({
+  test("Get Paginated WFH Pending Request Details @happy  - Sort by all fields with ASC and DESC", async ({
     request,
   }) => {
     const sortFields = ["name", "type", "date", "reason"];

@@ -55,7 +55,7 @@ test.describe("POST| -hrmsApi/workfromhomerequest/getPaginatedWFHPendingRequestD
     authToken = loginResponse.body.token;
   });
 
-  test("Get Paginated WFH Completed Request Details - Success scenario @happy @high", async ({
+  test("Get Paginated WFH Completed Request Details - Success scenario @happy", async ({
     request,
   }) => {
     const response = await attendance.getPaginatedWFHNonPendingRequestDetails(
@@ -78,7 +78,7 @@ test.describe("POST| -hrmsApi/workfromhomerequest/getPaginatedWFHPendingRequestD
     expect(typeof responseBody.totalPages).toBe("number");
   });
 
-  test("Get Paginated WFH Completed Request Details - Verify entry appears after Apply @happy @high", async ({
+  test("Get Paginated WFH Completed Request Details - Verify entry appears after Apply @happy", async ({
     request,
   }) => {
     // Step 1: Get initial count
@@ -123,7 +123,7 @@ test.describe("POST| -hrmsApi/workfromhomerequest/getPaginatedWFHPendingRequestD
     }
   });
 
-  test("Get Paginated WFH Completed Request Details - Verify entry is removed/updated after Reject @happy @high", async ({
+  test("Get Paginated WFH Completed Request Details - Verify entry is removed/updated after Reject @happy", async ({
     request,
   }) => {
     // Use helper function to get successful response
@@ -168,7 +168,7 @@ test.describe("POST| -hrmsApi/workfromhomerequest/getPaginatedWFHPendingRequestD
     expect(rejectedEntry).toBeUndefined();
   });
 
-  test("Get Paginated WFH Completed Request Details - Invalid pagination parameters @negative @high", async ({
+  test("Get Paginated WFH Completed Request Details - Invalid pagination parameters @negative", async ({
     request,
   }) => {
     const invalidRequestBody = {
@@ -188,7 +188,7 @@ test.describe("POST| -hrmsApi/workfromhomerequest/getPaginatedWFHPendingRequestD
     ExpectResponse.badRequest(response.status);
   });
 
-  test("Get Paginated WFH Completed Request Details - Without token @negative @high", async ({
+  test("Get Paginated WFH Completed Request Details - Without token @negative", async ({
     request,
   }) => {
     const response = await attendance.getPaginatedWFHNonPendingRequestDetails(
@@ -198,7 +198,7 @@ test.describe("POST| -hrmsApi/workfromhomerequest/getPaginatedWFHPendingRequestD
     ExpectResponse.internalServerError(response.status);
   });
 
-  test("Get Paginated WFH Completed Request Details  @happy @medium- with Different page sizes", async ({
+  test("Get Paginated WFH Completed Request Details  @happy- with Different page sizes", async ({
     request,
   }) => {
     const testCases = [
@@ -230,7 +230,7 @@ test.describe("POST| -hrmsApi/workfromhomerequest/getPaginatedWFHPendingRequestD
     }
   });
 
-  test("Get Paginated WFH Completed Request Details @happy @medium  - Sort by all fields with ASC and DESC", async ({ request }) => {
+  test("Get Paginated WFH Completed Request Details @happy  - Sort by all fields with ASC and DESC", async ({ request }) => {
     const sortFields = ["name", "type", "date", "reason"];
     const sortDirections = ["ASC", "DESC"];
     

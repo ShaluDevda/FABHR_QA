@@ -8,9 +8,8 @@ let authToken;
 
 test.describe("POST| -/hrmsApi/workfromhomerequest, Apply WFH API", () => {
   let createdWFHIds = []; // Track WFH IDs created during tests
- 
   // Helper function to try WFH with different dates until success
-  const tryWFHWithDifferentDates = async (attendance, request, payload, maxAttempts = 120) => {
+  const tryWFHWithDifferentDates = async (attendance, request, payload, maxAttempts = 200) => {
     
     for (let i = 0; i < maxAttempts; i++) {
       const testDate = new Date();
@@ -23,7 +22,7 @@ test.describe("POST| -/hrmsApi/workfromhomerequest, Apply WFH API", () => {
       };
       
       const response = await attendance.applyWFH(request, dynamicPayload, authToken);
-      
+      console.log(response)
       if (response.status === 200) {
         return { success: true, response, payload: dynamicPayload };
       } else if (response.body.message === "You have already applied Work from home in the given duration.") {
@@ -67,10 +66,11 @@ test.describe("POST| -/hrmsApi/workfromhomerequest, Apply WFH API", () => {
   });
 
  
- test("Apply WFH - Happy flow @high @happy", async ({ request }) => {
+ test.only("Apply WFH - Happy flow  @happy", async ({ request }) => {
     // Use helper function to get successful response
      const attendance = new Attandance();
     const result = await tryWFHWithDifferentDates(attendance, request, applyWFHExpected.requestBody);
+    console.log(result.body);
     expect(result.success).toBe(true);
 
     const response = result.response;
@@ -119,7 +119,7 @@ test.describe("POST| -/hrmsApi/workfromhomerequest, Apply WFH API", () => {
   });
   
 
-  test("Apply WFH - Duplicate request (already applied) @high @happy", async ({ request }) => {
+  test("Apply WFH - Duplicate request (already applied)  @happy", async ({ request }) => {
     const attendance = new Attandance();
     
     // First request - should succeed using helper function
@@ -156,7 +156,7 @@ test.describe("POST| -/hrmsApi/workfromhomerequest, Apply WFH API", () => {
   });
 
 
-  test("Apply WFH - Missing required fields @medium @negative", async ({ request }) => {
+  test("Apply WFH - Missing required fields  @negative", async ({ request }) => {
     const attendance = new Attandance();
     const incompletePayload = {
       employeeId: 368,
@@ -182,7 +182,7 @@ test.describe("POST| -/hrmsApi/workfromhomerequest, Apply WFH API", () => {
     }
   });
 
-  test("Apply WFH - Invalid employee ID @medium @negative", async ({ request }) => {
+  test("Apply WFH - Invalid employee ID  @negative", async ({ request }) => {
     const attendance = new Attandance();
     const invalidPayload = {
       ...applyWFHExpected.requestBody,
@@ -208,7 +208,7 @@ test.describe("POST| -/hrmsApi/workfromhomerequest, Apply WFH API", () => {
   });
 
  
- test("Apply WFH - Different WFH categories @high @happy", async ({ request }) => {
+ test("Apply WFH - Different WFH categories  @happy", async ({ request }) => {
     const attendance = new Attandance();
     
     // Test different WFH categories

@@ -23,7 +23,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     authToken = loginResponse.token;
   }, { timeout: 200000 });
 
-  test("POST| get overAll Approvals Paginated Pendings WFH  @happy @high - Success scenario", async ({
+  test("POST| get overAll Approvals Paginated Pendings WFH  @happy - Success scenario", async ({
     request,
   }) => {
     const response = await pagination.overAllApprovalsPaginatedPendingsWFH(
@@ -45,7 +45,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     expect(typeof responseBody.totalPages).toBe("number");
   });
 
-  test("POST| get overAll Approvals Paginated Pendings WFH @happy @medium - Verify WFH entry appears after successful application", async ({
+  test("POST| get overAll Approvals Paginated Pendings WFH @happy  - Verify WFH entry appears after successful application", async ({
     request,
   }) => {
     const attendance = new Attandance();
@@ -82,7 +82,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
   });
 
 
-test("POST| get overAll Approvals Paginated Pendings WFH @happy  @medium - Different page sizes", async ({
+test("POST| get overAll Approvals Paginated Pendings WFH @happy  - Different page sizes", async ({
   request,
 }) => {
   const testCases = [
@@ -117,7 +117,7 @@ test("POST| get overAll Approvals Paginated Pendings WFH @happy  @medium - Diffe
   }
 });
 
-test("POST| get overAll Approvals Paginated Pendings WFH @negative @low - Invalid pagination parameters", async ({
+test("POST| get overAll Approvals Paginated Pendings WFH @negative  - Invalid pagination parameters", async ({
   request,
 }) => {
   const invalidRequestBody = {
@@ -135,7 +135,7 @@ test("POST| get overAll Approvals Paginated Pendings WFH @negative @low - Invali
   expect(response.body.message).toBe("Bad Request");
 });
 
-test("POST| get overAll Approvals Paginated Pendings WFH @happy @high - Sort by all fields with ASC and DESC", async ({
+test("POST| get overAll Approvals Paginated Pendings WFH @happy - Sort by all fields with ASC and DESC", async ({
   request,
 }) => {
   const sortFields = ["name", "type", "date", "reason"];
@@ -174,7 +174,7 @@ test("POST| get overAll Approvals Paginated Pendings WFH @happy @high - Sort by 
 });
 
 test(
-  "POST| get overAll Approvals Paginated Pendings WFH and Reject one by one for data cleanup @happy @high - Keep only 1 SD entry",
+  "POST| get overAll Approvals Paginated Pendings WFH and Reject one by one for data cleanup @happy - Keep only 1 SD entry",
   async ({ request }) => {
   const attendance = new Attandance();
   const requestBody = {

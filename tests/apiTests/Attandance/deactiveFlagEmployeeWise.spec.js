@@ -23,7 +23,7 @@ test.describe("PUT | Time & Attendance>Attendance>Work From Home>WFH History  de
     expect(loginResponse.body.token).toBeTruthy();
     authToken = loginResponse.body.token;
   });
-  test("PUT | -/hrmsApi/workfromhomerequest/deactiveFlagEmployeeWise,  - Happy flow @high @happy", async ({
+  test("PUT | -/hrmsApi/workfromhomerequest/deactiveFlagEmployeeWise,  - Happy flow  @happy", async ({
     request,
   }) => {
     const requestBody = {

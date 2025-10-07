@@ -94,6 +94,7 @@ async getLeavePeriodstatus(request, token) {
         tenantId: inputsData.tenantId,
         username: inputsData.username,
       },
+      
     });
 
     try {
@@ -150,6 +151,151 @@ async getLeavePeriodstatus(request, token) {
         tenantId: inputsData.tenantId,
         username: inputsData.username,
       },
+    });
+
+    try {
+      const responseBody = await response.json();
+      return {
+        status: response.status(),
+        body: responseBody,
+      };
+    } catch (error) {
+      const responseText = await response.text();
+      return {
+        status: response.status(),
+        body: responseText || {},
+        error: error.message,
+      };
+    }
+  }
+
+   async createLeaveScheme(request, token,payload) {
+    const url = `${hrmsApi.hrmsApi}${endpoints.leaveScheme}`;
+    const response = await request.post(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": inputsData.ContentType,
+        Authorization: `Bearer ${token}`,
+        tenantId: inputsData.tenantId,
+        username: inputsData.username,
+      },
+      data: payload,
+    });
+
+    try {
+      const responseBody = await response.json();
+      return {
+        status: response.status(),
+        body: responseBody,
+        url: response.url()
+      };
+    } catch (error) {
+      const responseText = await response.text();
+      return {
+        status: response.status(),
+        body: responseText || {},
+        error: error.message,
+       
+      };
+    }
+  }
+
+  
+    async getemployeeInfo(request, token) {
+    const url = `${hrmsApi.hrmsApi}${endpoints.getEmployeInfo}`;
+    const response = await request.get(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": inputsData.ContentType,
+        Authorization: `Bearer ${token}`,
+        tenantId: inputsData.tenantId,
+        username: inputsData.username,
+      },
+    });
+
+    try {
+      const responseBody = await response.json();
+      return {
+        status: response.status(),
+        body: responseBody,
+      };
+    } catch (error) {
+      const responseText = await response.text();
+      return {
+        status: response.status(),
+        body: responseText || {},
+        error: error.message,
+      };
+    }
+  }
+
+
+    async getHolidays(request, token) {
+    const url = `${hrmsApi.hrmsApi}${endpoints.getHolodays}`;
+    const response = await request.get(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": inputsData.ContentType,
+        Authorization: `Bearer ${token}`,
+        tenantId: inputsData.tenantId,
+        username: inputsData.username,
+      },
+    });
+
+    try {
+      const responseBody = await response.json();
+      return {
+        status: response.status(),
+        body: responseBody,
+      };
+    } catch (error) {
+      const responseText = await response.text();
+      return {
+        status: response.status(),
+        body: responseText || {},
+        error: error.message,
+      };
+    }
+  }
+    async getfindHolidayByLeavePeroid(request, token) {
+    const url = `${hrmsApi.hrmsApi}${endpoints.findHolidayByLeavePeroid}`;
+    const response = await request.get(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": inputsData.ContentType,
+        Authorization: `Bearer ${token}`,
+        tenantId: inputsData.tenantId,
+        username: inputsData.username,
+      },
+    });
+
+    try {
+      const responseBody = await response.json();
+      return {
+        status: response.status(),
+        body: responseBody,
+      };
+    } catch (error) {
+      const responseText = await response.text();
+      return {
+        status: response.status(),
+        body: responseText || {},
+        error: error.message,
+      };
+    }
+  }
+
+     async activeDeactiveHoliday(request, token, payload) {
+    const url = `${hrmsApi.hrmsApi}${endpoints.activeDeactiveHoliday}`;
+    const response = await request.post(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": inputsData.ContentType,
+        Authorization: `Bearer ${token}`,
+        tenantId: inputsData.tenantId,
+        username: inputsData.username,
+      },
+      data: payload,
     });
 
     try {

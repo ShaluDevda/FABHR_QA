@@ -56,6 +56,10 @@ async inCorrectUsername(property) {
 async badRequestMessage(property) {
   expect(property).toBe(constants.badRequest);
 }
+
+async successfullyDataFound(property) {
+  expect(property).toBe(constants.successfullyDataFound);
+}
 }
 
 export default new ExpectResponse();

@@ -31,7 +31,7 @@ class Organization {
       };
     }
   }
-   async getFindGradeListWithoutTanantIdAndUserName(request, token) {
+  async getFindGradeListWithoutTanantIdAndUserName(request, token) {
     const url = `${hrmsApi.hrmsApi}${endpoints.findGradeList}`;
     const response = await request.get(url, {
       method: "GET",
@@ -57,7 +57,7 @@ class Organization {
     }
   }
 
-   async getFindBranchList(request, token) {
+  async getFindBranchList(request, token) {
     const url = `${hrmsApi.hrmsApi}${endpoints.findBranchList}`;
     const response = await request.get(url, {
       method: "GET",
@@ -91,7 +91,7 @@ class Organization {
       headers: {
         "Content-Type": inputsData.ContentType,
         Authorization: `Bearer ${token}`,
-       
+
       },
     });
 
@@ -110,7 +110,7 @@ class Organization {
       };
     }
   }
-   async getDepartmentList(request, token) {
+  async getDepartmentList(request, token) {
     const url = `${hrmsApi.hrmsApi}${endpoints.department}`;
     const response = await request.get(url, {
       method: "GET",
@@ -145,7 +145,7 @@ class Organization {
       headers: {
         "Content-Type": inputsData.ContentType,
         Authorization: `Bearer ${token}`,
-       
+
       },
     });
 
@@ -164,7 +164,7 @@ class Organization {
       };
     }
   }
-    async getDesignationList(request, token) {
+  async getDesignationList(request, token) {
     const url = `${hrmsApi.hrmsApi}${endpoints.designation}`;
     const response = await request.get(url, {
       method: "GET",
@@ -199,7 +199,7 @@ class Organization {
       headers: {
         "Content-Type": inputsData.ContentType,
         Authorization: `Bearer ${token}`,
-       
+
       },
     });
 
@@ -219,7 +219,7 @@ class Organization {
     }
   }
 
-      async getBusinessunitList(request, token) {
+  async getBusinessunitList(request, token) {
     const url = `${hrmsApi.hrmsApi}${endpoints.businessunit}`;
     const response = await request.get(url, {
       method: "GET",
@@ -254,7 +254,7 @@ class Organization {
       headers: {
         "Content-Type": inputsData.ContentType,
         Authorization: `Bearer ${token}`,
-       
+
       },
     });
 
@@ -273,6 +273,64 @@ class Organization {
       };
     }
   }
+
+  async createBranch(request, token, payload) {
+    const url = `${hrmsApi.hrmsApi}${endpoints.branch}`;
+    const response = await request.post(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": inputsData.ContentType,
+        Authorization: `Bearer ${token}`,
+        tenantId: inputsData.tenantId,
+        username: inputsData.username,
+
+      },
+      data: payload,
+    });
+
+    try {
+      const responseBody = await response.json();
+      return {
+        status: response.status(),
+        body: responseBody,
+      };
+    } catch (error) {
+      const responseText = await response.text();
+      return {
+        status: response.status(),
+        body: responseText || {},
+        error: error.message,
+      };
+    }
+  }
+  async deleteBranch(request, token, branchId) {
+    const url = `${hrmsApi.hrmsApi}${endpoints.branch}${endpoints.delete}${branchId}`;
+    const response = await request.delete(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": inputsData.ContentType,
+        Authorization: `Bearer ${token}`,
+        tenantId: inputsData.tenantId,
+        username: inputsData.username,
+      },
+    });
+
+    try { 
+      const responseBody = await response.json();
+      return {
+        status: response.status(),
+        body: responseBody,
+      };
+    } catch (error) {
+      const responseText = await response.text();
+      return {
+        status: response.status(),
+        body: responseText || {},
+        error: error.message,
+      };
+    }
+  }
 }
 
 export { Organization };
+

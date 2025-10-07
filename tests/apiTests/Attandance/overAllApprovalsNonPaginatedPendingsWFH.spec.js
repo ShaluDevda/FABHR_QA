@@ -147,7 +147,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     expect(response.body.message).toBe("Bad Request");
   });
 
-  test("POST| get overAll Approvals Non Paginated Pendings WFH @happy @high - Sort by all fields with ASC and DESC", async ({ request }) => {
+  test("POST| get overAll Approvals Non Paginated Pendings WFH @happy - Sort by all fields with ASC and DESC", async ({ request }) => {
     const sortFields = ["name", "type", "date", "reason"];
     const sortDirections = ["ASC", "DESC"];
     

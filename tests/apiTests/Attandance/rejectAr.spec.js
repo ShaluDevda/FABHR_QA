@@ -22,8 +22,7 @@ test.describe("Apply AR (Attendance Regularization) API", () => {
   });
 
   test("Apply AR and Reject-  Success scenario  @happy", async ({ request }) => {
-    // @priority: high
-    // @happy
+   
     const attendance = new Attandance();
     let response;
     let attempts = 0;
@@ -128,7 +127,7 @@ test.describe("Apply AR (Attendance Regularization) API", () => {
    expect(rejectResponse.body.message).toBe("Data Found Successfully");
   });
 
-  test("Apply AR and Approve and than cancel -  Success scenario  @happy @medium", async ({ request }) => {
+  test("Apply AR and Approve and than cancel -  Success scenario  @happy", async ({ request }) => {
    // @priority: medium
    // @happy
     const attendance = new Attandance();

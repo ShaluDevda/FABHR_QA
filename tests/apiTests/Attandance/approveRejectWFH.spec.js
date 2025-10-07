@@ -48,8 +48,8 @@ test.describe("Reject and Approve WFH API", () => {
       authToken = loginResponse.body.token;
     });
 
-  // Happy Path - High Priority Tests
-  test("Apply WFH then Reject WFH - Complete workflow @high @happy", async ({ request }) => {
+  // Happy Path 
+  test("Apply WFH then Reject WFH - Complete workflow @happy", async ({ request }) => {
     const attendance = new Attandance();
     
     // Step 1: Apply WFH first using helper function
@@ -83,7 +83,7 @@ test.describe("Reject and Approve WFH API", () => {
     expect(rejectResponse.body.approvalStatus).toBe("REJ");
     expect(rejectResponse.body.approvalorcancelremark).toBe("Reject");
   });
- test("Apply WFH then Approve WFH - Complete workflow @high @happy", async ({ request }) => {
+ test("Apply WFH then Approve WFH - Complete workflow  @happy", async ({ request }) => {
     const attendance = new Attandance();
     
     // Step 1: Apply WFH first using helper function
@@ -119,7 +119,7 @@ test.describe("Reject and Approve WFH API", () => {
     expect(rejectResponse.body.approvalorcancelremark).toBe("Reject");
   });
   // Negative Path - Medium Priority Tests
-  test("Reject and Approve WFH - Invalid WFH ID @medium @negative", async ({ request }) => {
+  test("Reject and Approve WFH - Invalid WFH ID  @negative", async ({ request }) => {
     const attendance = new Attandance();
     const invalidRejectPayload = {
       ...applyWFHExpected.rejectWFHPayload,
@@ -145,7 +145,7 @@ test.describe("Reject and Approve WFH API", () => {
     }
   });
 
-  test("Reject WFH and Approve WFH - Missing required fields @medium @negative", async ({ request }) => {
+  test("Reject WFH and Approve WFH - Missing required fields  @negative", async ({ request }) => {
     const attendance = new Attandance();
     const incompleteRejectPayload = {
       workFromHomeDateWiseId: 61,
@@ -173,7 +173,7 @@ test.describe("Reject and Approve WFH API", () => {
   });
 
   // Performance/Non-functional - Low Priority Tests
-  test("Reject and Approve WFH - Response time validation @low @negative", async ({ request }) => {
+  test("Reject and Approve WFH - Response time validation  @negative", async ({ request }) => {
     const attendance = new Attandance();
     const rejectPayload = applyWFHExpected.rejectWFHPayload;
 
@@ -192,7 +192,7 @@ test.describe("Reject and Approve WFH API", () => {
   });
 
   // Edge Cases - Medium Priority Tests
-  test("Reject and Approve WFH - Different rejection reasons @medium @happy", async ({ request }) => {
+  test("Reject and Approve WFH - Different rejection reasons  @happy", async ({ request }) => {
     const attendance = new Attandance();
     
     // Test different rejection reasons

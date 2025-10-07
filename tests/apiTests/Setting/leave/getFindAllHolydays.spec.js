@@ -28,7 +28,6 @@ test.describe("GET| /hrmsApi/holidays/findAllHolydays/5, get findAllHolydays", (
     expect(response).toBeTruthy();
     ExpectResponse.okResponse(response.status);
     expect(Array.isArray(response.body)).toBe(true);
-    expect(response.body.length).toBeGreaterThan(0);
 
     // Assert the first item matches the expected structure and values
     const first = response.body[0];

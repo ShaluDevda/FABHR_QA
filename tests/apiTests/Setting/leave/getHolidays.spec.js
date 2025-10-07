@@ -4,7 +4,7 @@ import ExpectResponse from "../../../utils/endpoints/expect/expectResponse.js";
 import { Leave } from "../../../utils/endpoints/classes/settings/leave.js";
 import loginExpected from "../../../fixtures/Response/loginExpected.json" assert { type: "json" };
 
-test.describe("GET| /hrmsApi/leavePeriod/1, get find grade List", () => {
+test.describe("GET| /hrmsApi/holidays/hloiday/253, get Holydays", () => {
   let authToken, response;
 
   test.beforeEach(async ({ request }) => {
@@ -21,11 +21,40 @@ test.describe("GET| /hrmsApi/leavePeriod/1, get find grade List", () => {
     authToken = loginResponse.body.token;
   });
 
-  test("Get Leave  Period  list - Happy flow @happy @medium", async ({ request }) => {
+  test("Get Holydays - Happy flow @happy @medium", async ({ request }) => {
     const leave = new Leave();
-    response = await leave.getLeavePeriod(request, authToken);
+    response = await leave.getHolidays(request, authToken);
     console.log(response);
     expect(response).toBeTruthy();
-    ExpectResponse.okResponse(response.status);  
+    ExpectResponse.okResponse(response.status);
+
+    // Assert the first item has all required keys
+    const first = response.body;
+    const expectedKeys = [
+      "holidayId",
+      "createdDate",
+      "day",
+      "fromDate",
+      "toDate",
+      "holidayName",
+      "isMandatory",
+      "userId",
+      "companyId",
+      "year",
+      "daysName",
+      "isMandatoryValue",
+      "updateUserId",
+      "count",
+      "leavePeriodId",
+      "activeStatus",
+      "holidaySchemeId",
+      "employeeId",
+      "holidayType"
+    ];
+    expectedKeys.forEach(key => {
+      expect(first).toHaveProperty(key);
+    });
+
+  
   });
 });

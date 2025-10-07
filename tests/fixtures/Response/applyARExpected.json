@@ -17,10 +17,10 @@
     "toDate": "2025-09-14T18:30:00.000Z",
     "days": 1,
     "employeeRemark": "test",
-    "userId": 369,
-    "employeeId": 368,
+    "userId": 2,
+    "employeeId": 1,
     "companyId": 1,
-    "userIdUpdate": 369,
+    "userIdUpdate": 2,
     "status": "PEN",
     "approvalId": 368
   }

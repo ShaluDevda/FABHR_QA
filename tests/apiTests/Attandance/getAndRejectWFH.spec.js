@@ -24,7 +24,7 @@ test.describe("Reject and Approve WFH API", () => {
     authToken = loginResponse.body.token;
   });
 
-  test("Reject all WFH entries until less than 3 remain @high @happy", async ({
+  test("Reject all WFH entries until less than 3 remain  @happy", async ({
     request,
   }) => {
     // Step 1: Get all pending WFH entries

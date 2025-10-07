@@ -5,6 +5,8 @@
   "punchTime": "/punchTime",
   "findGradeList":"/grade/findGradeList/1",
   "findBranchList":"/branch/findAll/1",
+  "branch":"/branch",
+  "delete":"/delete/",
   "department":"/department/active/1",
   "designation":"/designation/1",
   "businessunit":"/businessunit/1",

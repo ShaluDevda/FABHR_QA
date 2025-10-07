@@ -12,7 +12,7 @@ test.describe('Login', () => {
   });
 
   
-  test('Login with valid username and password', { timeout: 80000 }, async ({ page }) => {
+  test('Login with valid username and password @happy', { timeout: 80000 }, async ({ page }) => {
    await loginPage.login('FABHR-537-fabhrdemo.in', '12345678');
 
    
@@ -49,7 +49,7 @@ test.describe('Login', () => {
     //     },
   ];
 
-  test.describe('Negative login', () => {
+  test.describe('Negative login @negative', () => {
     for (const { user, pass, selector, expected, expectedRegex } of negativeCases) {
       test(`login(${user}, ${pass}) shows error`, async ({ page }) => {
         await loginPage.login(user, pass);

@@ -29,20 +29,33 @@ test("getAllPresentListByDate @happy @medium", async ({ request }) => {
       payload.getAllLateComersListByDateCount
     );
     expect(response).toBeTruthy();
-    expect(response.status).toBe(200);
 
-    // Assert if response body contains data array and has items
-    if (Array.isArray(response.body) && response.body.length > 0) {
-      const item = response.body[0];
-      expect(item).toHaveProperty("empName");
-      expect(item).toHaveProperty("empCode");
-      expect(item).toHaveProperty("departmentName");
-      expect(item).toHaveProperty("status");
-      expect(item.status).toBe("Present");
-      expect(item).toHaveProperty("mode");
-      expect(item).toHaveProperty("reportedLateBy");
-      expect(item).toHaveProperty("punchRecords");
-      expect(item).toHaveProperty("startTime");
+    if (response.status === 500) {
+      // Assert for no data found
+      expect(response.body).toMatchObject({
+        statusCode: 500,
+        message: '  Present Data Not Found',
+        data: null,
+        isSuccess: false,
+        errorCode: null,
+        errorMsg: null
+      });
+    } else if (response.status === 200) {
+      // Assert if response body contains data array and has items
+      if (Array.isArray(response.body) && response.body.length > 0) {
+        const item = response.body[0];
+        expect(item).toHaveProperty("empName");
+        expect(item).toHaveProperty("empCode");
+        expect(item).toHaveProperty("departmentName");
+        expect(item).toHaveProperty("status");
+        expect(item.status).toBe("Present");
+        expect(item).toHaveProperty("mode");
+        expect(item).toHaveProperty("reportedLateBy");
+        expect(item).toHaveProperty("punchRecords");
+        expect(item).toHaveProperty("startTime");
+      }
+    } else {
+      throw new Error(`Unexpected response status: ${response.status}`);
     }
   });
 

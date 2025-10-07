@@ -6,7 +6,7 @@ import applyARExpected from "../../fixtures/Response/applyARExpected.json" asser
 import rejectPayload from "../../fixtures/payloads/rejectAndApproveAr.json" assert { type: "json" };
 
 test.describe("POST| -/hrmsApi/attendanceregularizationrequest,   Apply AR (Attendance Regularization) API", () => {
-  let authToken;
+  let authToken,firstResponsebody;
 
   test.beforeEach(async ({ request }) => {
     // Login to get authentication token
@@ -22,7 +22,7 @@ test.describe("POST| -/hrmsApi/attendanceregularizationrequest,   Apply AR (Atte
     authToken = loginResponse.token;
   });
 
-  test("Apply AR -  Success scenario @high @happy", async ({ request }) => {
+  test("Apply AR -  Success scenario @happy", async ({ request }) => {
     const attendance = new Attandance();
     let response;
     let attempts = 0;
@@ -133,7 +133,7 @@ test.describe("POST| -/hrmsApi/attendanceregularizationrequest,   Apply AR (Atte
     expect(rejectResponse.status, "Failed to reject the created AR.").toBe(200);
   });
 
-  test("Apply AR - Already applied scenario @medium @happy", async ({
+  test("Apply AR - Already applied scenario @happy ", async ({
     request,
   }) => {
     const attendance = new Attandance();
@@ -143,7 +143,6 @@ test.describe("POST| -/hrmsApi/attendanceregularizationrequest,   Apply AR (Atte
       applyARExpected.requestBody,
       authToken
     );
-
     // If first request was successful, try to apply again for the same date range
     if (firstResponse.status === 200) {
       const secondResponse = await attendance.applyAR(
@@ -151,6 +150,7 @@ test.describe("POST| -/hrmsApi/attendanceregularizationrequest,   Apply AR (Atte
         applyARExpected.requestBody,
         authToken
       );
+      console.log(secondResponse);
       const responseBody = secondResponse.body;
 
       expect(secondResponse.status).toBe(500);
@@ -161,30 +161,40 @@ test.describe("POST| -/hrmsApi/attendanceregularizationrequest,   Apply AR (Atte
 
       // Clean up the initially created AR by rejecting it
       const firstResponseBody = firstResponse.body;
-      const rejectionPayload = {
-        ...rejectPayload.rejectApproveAr,
-        arID: firstResponseBody.data.arID,
-        arCategory: firstResponseBody.data.arCategory,
-        days: firstResponseBody.data.days,
-        fromDate: firstResponseBody.data.fromDate,
-        toDate: firstResponseBody.data.toDate,
-        employeeRemark: firstResponseBody.data.employeeRemark,
-        status: "REJ", // Set status to Reject
-        reviewerRemark: "Rejecting for cleanup purposes",
-      };
-      const rejectResponse = await attendance.applyAR(
-        request,
-        rejectionPayload,
-        authToken
-      );
-      expect(
-        rejectResponse.status,
-        "Cleanup failed: Could not reject the initial AR."
-      ).toBe(200);
+
     }
+    else {
+       firstResponsebody = firstResponse.body;
+   console.log(firstResponsebody)
+      expect(firstResponsebody.statusCode).toBe(applyARExpected.failure.statusCode);
+      expect(firstResponsebody.message).toBe(applyARExpected.failure.message);
+      expect(firstResponsebody.isSuccess).toBe(applyARExpected.failure.isSuccess);
+      expect(firstResponsebody.data).toBeNull();
+
+    }
+    const rejectionPayload = {
+      ...rejectPayload.rejectApproveAr,
+      arID: firstResponsebody.data.arID,
+      arCategory: firstResponsebody.data.arCategory,
+      days: firstResponsebody.data.days,
+      fromDate: firstResponsebody.data.fromDate,
+      toDate: firstResponsebody.data.toDate,
+      employeeRemark: firstResponsebody.data.employeeRemark,
+      status: "REJ", // Set status to Reject
+      reviewerRemark: "Rejecting for cleanup purposes",
+    };
+    const rejectResponse = await attendance.applyAR(
+      request,
+      rejectionPayload,
+      authToken
+    );
+    expect(
+      rejectResponse.status,
+      "Cleanup failed: Could not reject the initial AR."
+    ).toBe(200);
   });
 
-  test("Apply AR - Invalid request body @medium @negative", async ({
+  test("Apply AR - Invalid request body  @negative", async ({
     request,
   }) => {
     const attendance = new Attandance();
@@ -206,7 +216,7 @@ test.describe("POST| -/hrmsApi/attendanceregularizationrequest,   Apply AR (Atte
     expect(responseBody.isSuccess).toBe(false);
   });
 
-  test("Apply AR - Without authentication token @low @negative", async ({
+  test("Apply AR - Without authentication token  @negative", async ({
     request,
   }) => {
     const attendance = new Attandance();

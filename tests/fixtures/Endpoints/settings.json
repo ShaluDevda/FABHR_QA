@@ -5,5 +5,10 @@
   "getLeavePeriod": "/leavePeriod/1",
   "getLeavePendingCountOfCurrentSession": "/leaveApply/getLeavePendingCountOfCurrentSession/1",
   "findAllHolydays": "/holidays/findAllHolydays/5",
-  "leaveRules":"/leaveRules/5"
+  "leaveRules":"/leaveRules/5",
+  "leaveScheme":"/leaveScheme",
+  "getEmployeInfo":"/employee/employeeInfo/emp/1",
+  "getHolodays":"/holidays/hloiday/253",
+  "findHolidayByLeavePeroid":"/holidays/findHolidayByLeavePeroid/1/1",
+  "activeDeactiveHoliday":"/holidays/1"
 }

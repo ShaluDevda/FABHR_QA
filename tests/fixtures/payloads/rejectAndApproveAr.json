@@ -5,7 +5,7 @@
     "approvalByEmpDepartment": null,
     "approvalByEmpDesignation": null,
     "approvalByEmpName": null,
-    "approvalId": 368,
+    "approvalId": 1,
     "approvalRemark": "wder",
     "approveEmployeeLogoPath": null,
     "arCategory": "CN",
@@ -23,7 +23,7 @@
     "employeeCode": "FABHR-537",
     "employeeDepartment": "Human Resource",
     "employeeDesignation": "Team Lead",
-    "employeeId": 368,
+    "employeeId": 1,
     "employeeLogoPath": "tenantsFile/fabhrdemo/Document/CompanyAssets/20250821_120218_image (1).png",
     "employeeName": "Rajesh Sharma",
     "employeeRemark": "test",
@@ -34,7 +34,7 @@
     "statusValue": "Pending",
     "toDate": 1751394600000,
     "updatedDate": null,
-    "userId": 369,
-    "userIdUpdate": 369
+    "userId": 2,
+    "userIdUpdate": 2
 }
 }

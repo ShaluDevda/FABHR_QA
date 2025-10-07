@@ -24,8 +24,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     authToken = loginResponse.token;
   });
 
-  test("Get Paginated AR Pending Request Details @high @happy - Success scenario", async ({
-    // @priority: high
+  test("Get Paginated AR Pending Request Details  @happy - Success scenario", async ({
     request,
   }) => {
     const response = await pagination.verifyPagination(
@@ -47,8 +46,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     expect(typeof responseBody.totalPages).toBe("number");
   });
 
-  test("Get Paginated AR Pending Request Details @high @happy - Verify AR entry appears after successful application", async ({
-    // @priority: high
+  test("Get Paginated AR Pending Request Details  @happy - Verify AR entry appears after successful application", async ({
     request,
   }) => {
     const attendance = new Attandance();
@@ -89,8 +87,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     expect(updatedCount).toBeGreaterThanOrEqual(initialCount);
   });
 
-  test("Get Paginated AR Pending Request Details - Different page sizes @high @happy", async ({
-    // @priority: medium
+  test("Get Paginated AR Pending Request Details - Different page sizes  @happy", async ({
     request,
   }) => {
     const testCases = [
@@ -144,7 +141,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     expect(response.body.message).toBe("Server Not Responding");
   });
 
-  test("Get Paginated AR Pending Request Details - All sorting scenarios @high @happy", async ({
+  test("Get Paginated AR Pending Request Details - All sorting scenarios @happy", async ({
     // @priority: medium
     request,
   }) => {
@@ -183,7 +180,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     }
   });
 
-  test("Get Paginated AR Pending Request Details - Sort by all fields with ASC and DESC @high @happy", async ({
+  test("Get Paginated AR Pending Request Details - Sort by all fields with ASC and DESC  @happy", async ({
     // @priority: medium
     request,
   }) => {
@@ -229,7 +226,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     }
   });
 
-  test("Search AR requests - Valid name search @medium @happy", async ({
+  test("Search AR requests - Valid name search @happy", async ({
     
     request,
   }) => {
@@ -265,7 +262,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     });
   });
 
-  test("Search AR requests - Invalid name search @medium @negative", async ({
+  test("Search AR requests - Invalid name search @negative", async ({
     // @priority: low
     request,
   }) => {
@@ -291,7 +288,7 @@ test.describe("Get Paginated AR Pending Request Details API", () => {
     });
   });
 
-  test("Search AR requests - Partial name match @medium @happy", async ({
+  test("Search AR requests - Partial name match @happy", async ({
     
     request,
   }) => {

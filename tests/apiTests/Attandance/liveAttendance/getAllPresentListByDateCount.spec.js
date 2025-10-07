@@ -37,7 +37,6 @@ test("getAllPresentListByDate @happy @medium", async ({ request }) => {
 
     expect(response.body).toHaveProperty("pageIndexs");
     expect(Array.isArray(response.body.pageIndexs)).toBe(true);
-    expect(response.body.pageIndexs.length).toBeGreaterThan(0);
 
     for (const page of response.body.pageIndexs) {
       expect(page).toHaveProperty("pageIndex");

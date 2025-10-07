@@ -2,12 +2,14 @@
   "happy": {
     "status": 200,
     "message": "success",
-    "employeeCode": "FABHR-537",
+    "employeeCode": "HR-102",
     "roles": ["Admin"],
-    "userId": 369,
-    "employeeId": 368,
-    "loginName": "FABHR-537-fabhrdemo.in",
-    "password":"Csipl@12345",
+    "userId": 2,
+    "employeeId": 1,
+    "loginName": "HR-102-testing.in",
+    "loginfortestserver":"HR-102-testing.in",
+    "testpassword": 12345678,
+    "password":"12345678",
     "emailOfUser": "deepak.p@fabhr.in"
   },
   "negative": [
@@ -24,7 +26,7 @@
       "expected": "Server Not Responding"
     },
     {
-      "username": "FABHR-72-fabhrdemo.in",
+      "username": "HR-102-testing.in",
       "password": "0",
       "status": 200,
       "expectedRegex": "Incorrect password !!"
