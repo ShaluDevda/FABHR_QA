@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../../utils/endpoints/classes/login";
 import { Organization } from "../../utils/endpoints/classes/settings/Organization";
-import { Attandance } from "../../utils/endpoints/classes/Attandance/myAttandance";
+import { Attandance } from "../../utils/endpoints/classes/Attandance/myAttandance.js";
 import {
   extractBusinessunitList,
   extractDepartmentList,

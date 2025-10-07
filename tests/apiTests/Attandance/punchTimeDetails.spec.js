@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../../utils/endpoints/classes/login";
-import { PunchTime } from "../../utils/endpoints/classes/attandance/punchTime";
+import { PunchTime } from "../../utils/endpoints/classes/Attandance/punchTime";
 import ExpectResponse from "../../utils/endpoints/expect/expectResponse";
 import loginExpected from "../../fixtures/Response/loginExpected.json" assert { type: "json" };
 

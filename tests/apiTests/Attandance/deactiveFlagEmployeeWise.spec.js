@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../../utils/endpoints/classes/login";
 import { Attandance } from "../../utils/endpoints/classes/Attandance/myAttandance";
-import { Pagination } from "../../utils/endpoints/classes/attandance/Pagination";
+import { Pagination } from "../../utils/endpoints/classes/Attandance/Pagination";
 import loginExpected from "../../fixtures/Response/loginExpected.json" assert { type: "json" };
 import applyWFHExpected from "../../fixtures/Response/applyWFH.json" assert { type: "json" };
 import paginationPayload from "../../fixtures/payloads/pagination.json" assert { type: "json" };

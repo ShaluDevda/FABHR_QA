@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../../utils/endpoints/classes/login";
-import { Pagination } from "../../utils/endpoints/classes/attandance/Pagination";
+import { Pagination } from "../../utils/endpoints/classes/Attandance/Pagination.js";
 import paginationPayload from "../../fixtures/payloads/pagination.json" assert { type: "json" };
 import applyWFHExpected from "../../fixtures/Response/applyWFH.json" assert { type: "json" };
 import loginExpected from "../../fixtures/Response/loginExpected.json" assert { type: "json" };
