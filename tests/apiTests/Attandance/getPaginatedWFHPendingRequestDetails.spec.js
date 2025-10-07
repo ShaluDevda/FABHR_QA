@@ -64,7 +64,6 @@ test.describe("Get Paginated WFH Pending Request Details API", () => {
       getPaginatedWFHExpected.baseRequestBody,
       authToken
     );
-console.log(response)
     const responseBody = response.body;
     "WFH Paginated Response:", responseBody;
 

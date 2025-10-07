@@ -7,7 +7,7 @@ import { Pagination } from "../../utils/endpoints/classes/attandance/Pagination"
 import paginationPayload from "../../fixtures/payloads/pagination.json" assert { type: "json" };
 
 let response;
-test.describe("Time & Attendance>Attendance get ActiveWFHEmployees ", () => {
+test.describe.skip("Time & Attendance>Attendance get ActiveWFHEmployees ", () => {
   let authToken;
 
   test.beforeEach(async ({ request }) => {

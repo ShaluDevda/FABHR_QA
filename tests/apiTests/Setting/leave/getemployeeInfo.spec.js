@@ -21,11 +21,10 @@ test.describe("POST| /hrmsApi/employee/employeeInfo/emp/1,Get employeeInfo", () 
         authToken = loginResponse.body.token;
     });
 
-    test("Get employeeInfo - Happy flow @happy @medium", async ({ request }) => {
+    test("Get employeeInfo - Happy flow @happy", async ({ request }) => {
         const leave = new Leave();
         response = await leave.getemployeeInfo(request, authToken);
-        console.log(response.url)
-        console.log(response);
+     
         expect(response).toBeTruthy();
         ExpectResponse.okResponse(response.status);
         ExpectResponse.successfullyDataFound(response.body.message);

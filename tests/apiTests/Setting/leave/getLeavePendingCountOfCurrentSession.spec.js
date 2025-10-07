@@ -21,10 +21,9 @@ test.describe("GET| /hrmsApi/leaveApply/getLeavePendingCountOfCurrentSession/1, 
     authToken = loginResponse.body.token;
   });
 
-  test("getLeavePendingCountOfCurrentSession - Happy flow @happy @medium", async ({ request }) => {
+  test("getLeavePendingCountOfCurrentSession - Happy flow @happy", async ({ request }) => {
     const leave = new Leave();
     response = await leave.getLeavePendingCountOfCurrentSession(request, authToken);
-    console.log(response);
     expect(response).toBeTruthy();
     ExpectResponse.okResponse(response.status);   
   });

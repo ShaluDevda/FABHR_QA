@@ -22,7 +22,7 @@ test.describe("GET| /hrmsApi/designation/1, get  designation List", () => {
     authToken = loginResponse.body.token;
   });
 
-  test("Get designation list - Happy flow @happy @medium", async ({
+  test("Get designation list - Happy flow @happy", async ({
     request,
   }) => {
     const organization = new Organization();
@@ -57,7 +57,7 @@ test.describe("GET| /hrmsApi/designation/1, get  designation List", () => {
     const gradeList = extractDesignationList(response.body);
   });
 
-  test("Get designation list without tenantId - @negative @medium", async ({
+  test("Get designation list without tenantId - @negative", async ({
     request,
   }) => {
     const organization = new Organization();

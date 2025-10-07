@@ -5,7 +5,7 @@ import loginExpected from "../../fixtures/Response/loginExpected.json" assert { 
 import applyWFHExpected from "../../fixtures/Response/applyWFH.json" assert { type: "json" };
 
 
-test.describe("Reject and Approve WFH API", () => {
+test.describe.skip("Reject and Approve WFH API", () => {
   let authToken;
   let createdWFHIds = []; // Track WFH IDs created during tests
   

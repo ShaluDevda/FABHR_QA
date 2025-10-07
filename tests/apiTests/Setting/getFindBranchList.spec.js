@@ -23,7 +23,7 @@ test.describe("GET| /hrmsApi/branch/findAll/1, get find branch List", () => {
     authToken = loginResponse.body.token;
   });
 
-  test("Get branch list - Happy flow @happy @medium", async ({ request }) => {
+  test("Get branch list - Happy flow @happy", async ({ request }) => {
     const organization = new Organization();
     response = await organization.getFindBranchList(request, authToken);
     expect(response).toBeTruthy();
@@ -67,7 +67,7 @@ test.describe("GET| /hrmsApi/branch/findAll/1, get find branch List", () => {
 
   });
 
-  test("Get branch list without tenantId - @negative @medium", async ({ request }) => {
+  test("Get branch list without tenantId - @negative", async ({ request }) => {
     const organization = new Organization();
     response = await organization.getFindBranchListWithoutTanantIdAndUserName(request, authToken);
     ExpectResponse.invalidAccess(response.body.message);

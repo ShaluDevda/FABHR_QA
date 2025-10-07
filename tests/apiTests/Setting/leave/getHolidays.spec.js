@@ -21,10 +21,9 @@ test.describe("GET| /hrmsApi/holidays/hloiday/253, get Holydays", () => {
     authToken = loginResponse.body.token;
   });
 
-  test("Get Holydays - Happy flow @happy @medium", async ({ request }) => {
+  test("Get Holydays - Happy flow @happy", async ({ request }) => {
     const leave = new Leave();
     response = await leave.getHolidays(request, authToken);
-    console.log(response);
     expect(response).toBeTruthy();
     ExpectResponse.okResponse(response.status);
 

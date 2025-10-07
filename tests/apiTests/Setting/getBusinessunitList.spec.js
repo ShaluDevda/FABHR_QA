@@ -22,7 +22,7 @@ test.describe("GET| /hrmsApi/businessunit/1, get businessunit List", () => {
     authToken = loginResponse.body.token;
   });
 
-  test("Get businessunit list - Happy flow @happy @medium", async ({
+  test("Get businessunit list - Happy flow @happy", async ({
     request,
   }) => {
     const organization = new Organization();
@@ -43,7 +43,7 @@ test.describe("GET| /hrmsApi/businessunit/1, get businessunit List", () => {
     const gradeList = extractBusinessunitList(response.body);
   });
 
-  test("Get businessunit list without tenantId - @negative @medium", async ({
+  test("Get businessunit list without tenantId - @negative", async ({
     request,
   }) => {
     const organization = new Organization();

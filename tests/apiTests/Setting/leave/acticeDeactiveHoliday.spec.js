@@ -21,7 +21,7 @@ test.describe("POST| /hrmsApi/holidays/1, Active Deactive holiday", () => {
         authToken = loginResponse.body.token;
     });
 
-    test("Active Deactive holiday - Happy flow @happy @medium", async ({ request }) => {
+    test("Active Deactive holiday - Happy flow @happy", async ({ request }) => {
         const leave = new Leave();
         // Get the holiday data
         holiday = await leave.getfindHolidayByLeavePeroid(request, authToken);

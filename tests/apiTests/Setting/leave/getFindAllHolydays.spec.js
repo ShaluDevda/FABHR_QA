@@ -21,10 +21,9 @@ test.describe("GET| /hrmsApi/holidays/findAllHolydays/5, get findAllHolydays", (
     authToken = loginResponse.body.token;
   });
 
-  test("Get findAllHolydays - Happy flow @happy @medium", async ({ request }) => {
+  test("Get findAllHolydays - Happy flow @happy", async ({ request }) => {
     const leave = new Leave();
     response = await leave.findAllHolydays(request, authToken);
-    console.log(response);
     expect(response).toBeTruthy();
     ExpectResponse.okResponse(response.status);
     expect(Array.isArray(response.body)).toBe(true);

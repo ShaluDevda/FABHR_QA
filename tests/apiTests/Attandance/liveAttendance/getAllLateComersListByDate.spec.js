@@ -28,7 +28,6 @@ test("get all late comers list by date @happy @medium", async ({ request }) => {
       authToken,
       payload.getAllLateComersListByDate
     );
-    console.log(response);
     expect(response).toBeTruthy();
     expect(response.status).toBe(200);
   });

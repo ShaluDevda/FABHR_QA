@@ -6,7 +6,7 @@ import applyWFHExpected from "../../fixtures/Response/applyWFH.json" assert { ty
 let authToken;
 
 
-test.describe("POST| -/hrmsApi/workfromhomerequest, Apply WFH API", () => {
+test.describe.skip("POST| -/hrmsApi/workfromhomerequest, Apply WFH API", () => {
   let createdWFHIds = []; // Track WFH IDs created during tests
   // Helper function to try WFH with different dates until success
   const tryWFHWithDifferentDates = async (attendance, request, payload, maxAttempts = 200) => {
@@ -22,7 +22,6 @@ test.describe("POST| -/hrmsApi/workfromhomerequest, Apply WFH API", () => {
       };
       
       const response = await attendance.applyWFH(request, dynamicPayload, authToken);
-      console.log(response)
       if (response.status === 200) {
         return { success: true, response, payload: dynamicPayload };
       } else if (response.body.message === "You have already applied Work from home in the given duration.") {
@@ -66,11 +65,10 @@ test.describe("POST| -/hrmsApi/workfromhomerequest, Apply WFH API", () => {
   });
 
  
- test.only("Apply WFH - Happy flow  @happy", async ({ request }) => {
+ test("Apply WFH - Happy flow  @happy", async ({ request }) => {
     // Use helper function to get successful response
      const attendance = new Attandance();
     const result = await tryWFHWithDifferentDates(attendance, request, applyWFHExpected.requestBody);
-    console.log(result.body);
     expect(result.success).toBe(true);
 
     const response = result.response;

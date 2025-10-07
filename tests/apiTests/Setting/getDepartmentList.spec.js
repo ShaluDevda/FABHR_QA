@@ -23,7 +23,7 @@ test.describe("GET| /hrmsApi/department/active/1, get find grade List", () => {
     authToken = loginResponse.body.token;
   });
 
-  test("Get department list - Happy flow @happy @medium", async ({ request }) => {
+  test("Get department list - Happy flow @happy", async ({ request }) => {
     const organization = new Organization();
     response = await organization.getDepartmentList(request, authToken);
     expect(response).toBeTruthy();
@@ -51,7 +51,7 @@ test.describe("GET| /hrmsApi/department/active/1, get find grade List", () => {
    
   });
 
-   test("Get department list without tenantId - @negative @medium", async ({ request }) => {
+   test("Get department list without tenantId - @negative", async ({ request }) => {
     const organization = new Organization();
     response = await organization.getDepartmentListWithoutTanantIdAndUserName(request, authToken);
     ExpectResponse.invalidAccess(response.body.message);

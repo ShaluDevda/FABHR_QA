@@ -23,7 +23,7 @@ test.describe("GET| /hrmsApi/grade/findGradeList/1, get find grade List", () => 
     authToken = loginResponse.body.token;
   });
 
-  test("Get Branch list - Happy flow @happy @medium", async ({ request }) => {
+  test("Get Branch list - Happy flow @happy", async ({ request }) => {
     const organization = new Organization();
     response = await organization.getFindGradeList(request, authToken);
     expect(response).toBeTruthy();
@@ -51,7 +51,7 @@ test.describe("GET| /hrmsApi/grade/findGradeList/1, get find grade List", () => 
    
   });
 
-   test("Get Grade list without tenantId - @negative @medium", async ({ request }) => {
+   test("Get Grade list without tenantId - @negative", async ({ request }) => {
     const organization = new Organization();
     response = await organization.getFindGradeListWithoutTanantIdAndUserName(request, authToken);
     ExpectResponse.invalidAccess(response.body.message);

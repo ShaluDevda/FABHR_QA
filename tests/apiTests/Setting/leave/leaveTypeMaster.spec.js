@@ -21,7 +21,7 @@ test.describe("GET| /hrmsApi/leaveTypeMaster/1, get find grade List", () => {
     authToken = loginResponse.body.token;
   });
 
-  test("Get leaveTypeMaster - Happy flow @happy @medium", async ({ request }) => {
+  test("Get leaveTypeMaster - Happy flow @happy", async ({ request }) => {
     const leave = new Leave();
     response = await leave.leaveTypeMaster(request, authToken);
     expect(response).toBeTruthy();

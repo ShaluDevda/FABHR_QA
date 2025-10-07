@@ -25,7 +25,6 @@ test.describe("POST| /hrmsApi/branch, Create Branch", () => {
     const payload = {"branchName":"testCompany","addressText":"Plot no. 91, Ratna Lok Colony,near medanta hospital, Indore, Madhya Pradesh 452011","pincode":"452011","countryId":"1","stateId":"1","cityId":"2","companyId":1,"address":{"addressText":"Plot no. 91, Ratna Lok Colony,near medanta hospital, Indore, Madhya Pradesh 452011","countryId":"1","stateId":"1","cityId":"2","pincode":"452011","userId":2},"activeStatus":"AC","userIdUpdate":2,"userId":2}
     const organization = new Organization();
     response = await organization.createBranch(request, authToken, payload);
-    console.log(response);
     expect(response).toBeTruthy();
     ExpectResponse.okResponse(response.status);
    
@@ -37,7 +36,6 @@ ExpectResponse.okResponse(response.status);
 // Verify the created branch name is present in the response
 const branchList = response.body?.data || response.body; // adjust if your API structure differs
 const branchNames = branchList.map(branch => branch.branchName);
-console.log(branchNames);
 expect(branchNames).toContain(payload.branchName);
    
   });

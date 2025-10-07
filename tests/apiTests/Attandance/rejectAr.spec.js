@@ -46,7 +46,6 @@ test.describe("Apply AR (Attendance Regularization) API", () => {
     } while (response.status !== 200 && attempts < maxAttempts);
 
     const responseBody = response.body;
- console.log(responseBody);
     // Assert only if we got a 200, else fail
     expect(response.status).toBe(200);
   //reject AR payload

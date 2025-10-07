@@ -31,7 +31,6 @@ test.describe("POST| updateAttendaceData API", () => {
       authToken,
       payload
     );
- console.log(response);
     // Assertions for response structure and employee fields
     expect(response).toBeTruthy();
     expect(response.status).toBe(200);

@@ -48,12 +48,8 @@ test.describe("POST| -/hrmsApi/attendanceregularizationrequest,   Apply AR (Atte
         fromDate: isoDate,
         toDate: isoDate,
       };
-      console.log(dynamicPayload);
       response = await attendance.applyAR(request, dynamicPayload, authToken);
-      console.log(response.headers);
-      console.log(response.url);
-      console.log(response.status);
-      console.log(response.body);
+     
       attempts++;
       // Defensive: If response is undefined/null, break to avoid infinite loop
       if (!response || typeof response.status !== "number") {
@@ -83,7 +79,6 @@ test.describe("POST| -/hrmsApi/attendanceregularizationrequest,   Apply AR (Atte
     }
 
     const responseBody = response.body;
-    console.log(responseBody)
     // If not 200 and not allowed retry message, fail here
     if (
       response.status !== 200 &&
@@ -150,7 +145,6 @@ test.describe("POST| -/hrmsApi/attendanceregularizationrequest,   Apply AR (Atte
         applyARExpected.requestBody,
         authToken
       );
-      console.log(secondResponse);
       const responseBody = secondResponse.body;
 
       expect(secondResponse.status).toBe(500);
@@ -165,7 +159,6 @@ test.describe("POST| -/hrmsApi/attendanceregularizationrequest,   Apply AR (Atte
     }
     else {
        firstResponsebody = firstResponse.body;
-   console.log(firstResponsebody)
       expect(firstResponsebody.statusCode).toBe(applyARExpected.failure.statusCode);
       expect(firstResponsebody.message).toBe(applyARExpected.failure.message);
       expect(firstResponsebody.isSuccess).toBe(applyARExpected.failure.isSuccess);

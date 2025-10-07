@@ -100,7 +100,6 @@ test.describe("POST| getMarkBulkAttentancPagination API", () => {
       authToken,
       payload,
     );
-    console.log(response);
 
     // Assertions for response structure
     expect(response).toBeTruthy();

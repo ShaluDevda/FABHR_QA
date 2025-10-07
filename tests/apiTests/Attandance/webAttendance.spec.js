@@ -187,8 +187,7 @@ test.describe("Web Attendance POST API", () => {
       token,
       attendanceData
     );
-    console.log(response);
-    console.log("Check-in Data Sent:", attendanceData);
+    
     expect(response).toBeTruthy();
     expect(response.status).toBe(200);
     expect(response.body).toBeTruthy();

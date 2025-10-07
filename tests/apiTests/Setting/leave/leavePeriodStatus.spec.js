@@ -21,7 +21,7 @@ test.describe("GET| /hrmsApi/leavePeriod/status/1, get find grade List", () => {
     authToken = loginResponse.body.token;
   });
 
-  test("Get Leave  Period  list - Happy flow @happy @medium", async ({ request }) => {
+  test("Get Leave  Period  list - Happy flow @happy", async ({ request }) => {
     const leave = new Leave();
     response = await leave.getLeavePeriodstatus(request, authToken);
     expect(response).toBeTruthy();

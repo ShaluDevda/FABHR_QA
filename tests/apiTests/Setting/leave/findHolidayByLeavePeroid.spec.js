@@ -21,11 +21,9 @@ test.describe("POST| /hrmsApi/holidays/findHolidayByLeavePeroid/1/1, findHoliday
         authToken = loginResponse.body.token;
     });
 
-    test("Create leave scheme - Happy flow @happy @medium", async ({ request }) => {
+    test("Create leave scheme - Happy flow @happy", async ({ request }) => {
         const leave = new Leave();
         response = await leave.getfindHolidayByLeavePeroid(request, authToken);
-        console.log(response.url)
-        console.log(response);
         expect(response).toBeTruthy();
         ExpectResponse.okResponse(response.status);
       

@@ -30,11 +30,10 @@ test.describe("POST| /hrmsApi//hrmsApi/leaveScheme, Create leave scheme", () => 
         authToken = loginResponse.body.token;
     });
 
-    test("Create leave scheme - Happy flow @happy @medium", async ({ request }) => {
+    test("Create leave scheme - Happy flow @happy ", async ({ request }) => {
         const leave = new Leave();
         response = await leave.createLeaveScheme(request, authToken, payload);
-        console.log(response.url)
-        console.log(response);
+       
         expect(response).toBeTruthy();
         ExpectResponse.okResponse(response.status);
         expect(response.body).toEqual(expect.objectContaining({

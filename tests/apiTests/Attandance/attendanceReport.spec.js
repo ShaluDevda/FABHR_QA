@@ -19,7 +19,7 @@ test.describe("Time & Attendance>Attendance get attendanceReport ", () => {
     expect(loginResponse.body.token).toBeTruthy();
     authToken = loginResponse.body.token;
   });
-  test("GET get attendanceReport  - Happy flow @high @happy", async ({ request }) => {
+  test("GET get attendanceReport  - Happy flow  @happy", async ({ request }) => {
     const attendance = new Attandance();
 
     // Call the method that returns the Playwright APIResponse object
