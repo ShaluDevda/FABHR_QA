@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../../utils/endpoints/classes/login";
-import { Attandance } from "../../utils/endpoints/classes/Attandance/myAttandance.js";
+import { Attandance } from "../../utils/endpoints/classes/Attandance/myAttandance";
 import loginExpected from "../../fixtures/Response/loginExpected.json" assert { type: "json" };
 import applyARExpected from "../../fixtures/Response/applyARExpected.json" assert { type: "json" };
 import rejectPayload from "../../fixtures/payloads/rejectAndApproveAr.json" assert { type: "json" };

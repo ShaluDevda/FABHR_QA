@@ -2,7 +2,6 @@ import endpoints from "../../../../fixtures/Endpoints/commonEndpoint.json" asser
 import attandanceEndpoints from "../../../../fixtures/Endpoints/Attandance.json" assert { type: "json" };
 
 import inputsData from "../../../../fixtures/inputs.json" assert { type: "json" };
-import { url } from "inspector";
 let responseBody;
 class Attandance {
   static getCurrentDateTime() {
