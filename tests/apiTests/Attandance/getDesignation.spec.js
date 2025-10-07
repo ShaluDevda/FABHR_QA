@@ -1,8 +1,8 @@
 
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../../utils/endpoints/classes/login.js";
-import { Attandance } from "../../utils/endpoints/classes/Attandance/myAttandance.js";
-import { extractDesignationNames } from "../../utils/endpoints/classes/general/commonMethod.js";
+import { LoginPage } from "../../utils/endpoints/classes/login";
+import { Attandance } from "../../utils/endpoints/classes/Attandance/myAttandance";
+import { extractDesignationNames } from "../../utils/endpoints/classes/general/commonMethod";
 import loginExpected from "../../fixtures/Response/loginExpected.json" assert { type: "json" };
 
 test.describe("Time & Attendance>Attendance get designation", () => {

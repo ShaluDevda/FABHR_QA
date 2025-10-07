@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../../utils/endpoints/classes/login.js";
-import { PunchTime } from "../../utils/endpoints/classes/attandance/punchTime.js";
-import ExpectResponse from "../../utils/endpoints/expect/expectResponse.js";
+import { LoginPage } from "../../utils/endpoints/classes/login";
+import { PunchTime } from "../../utils/endpoints/classes/attandance/punchTime";
+import ExpectResponse from "../../utils/endpoints/expect/expectResponse";
 import loginExpected from "../../fixtures/Response/loginExpected.json" assert { type: "json" };
 
 test.describe("GET| - hrmsApi/punchTime/FABHR-72-fabhrdemo.in/1 Punch Time Details GET API", () => {

@@ -1,7 +1,7 @@
 import { test, expect, request } from "@playwright/test";
-import { LoginPage } from "../../utils/endpoints/classes/login.js";
-import ExpectResponse from "../../utils/endpoints/expect/expectResponse.js";
-import { Organization } from "../../utils/endpoints/classes/settings/Organization.js";
+import { LoginPage } from "../../utils/endpoints/classes/login";
+import ExpectResponse from "../../utils/endpoints/expect/expectResponse";
+import { Organization } from "../../utils/endpoints/classes/settings/Organization";
 import loginExpected from "../../fixtures/Response/loginExpected.json" assert { type: "json" };
 
 

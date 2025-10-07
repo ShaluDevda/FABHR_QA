@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../../utils/endpoints/classes/login.js";
-import { Attandance } from "../../utils/endpoints/classes/Attandance/myAttandance.js";
-import { ResponseValidator } from "../../utils/validation/responseValidator.js";
-import ExpectResponse from "../../utils/endpoints/expect/expectResponse.js";
+import { LoginPage } from "../../utils/endpoints/classes/login";
+import { Attandance } from "../../utils/endpoints/classes/Attandance/myAttandance";
+import { ResponseValidator } from "../../utils/validation/responseValidator";
+import ExpectResponse from "../../utils/endpoints/expect/expectResponse";
 import loginExpected from "../../fixtures/Response/loginExpected.json" assert { type: "json" };
 
 test.describe("Get All Checkin Detail", () => {

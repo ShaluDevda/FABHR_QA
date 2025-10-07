@@ -1,8 +1,8 @@
 import { test, expect, request } from "@playwright/test";
-import { LoginPage } from "../../utils/endpoints/classes/login.js";
-import { extractGradeList } from "../../utils/endpoints/classes/general/commonMethod.js";
-import ExpectResponse from "../../utils/endpoints/expect/expectResponse.js";
-import { Organization } from "../../utils/endpoints/classes/settings/Organization.js";
+import { LoginPage } from "../../utils/endpoints/classes/login";
+import { extractGradeList } from "../../utils/endpoints/classes/general/commonMethod";
+import ExpectResponse from "../../utils/endpoints/expect/expectResponse";
+import { Organization } from "../../utils/endpoints/classes/settings/Organization";
 import loginExpected from "../../fixtures/Response/loginExpected.json" assert { type: "json" };
 
 

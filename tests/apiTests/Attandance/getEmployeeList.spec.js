@@ -1,8 +1,8 @@
 import { test, expect, request } from "@playwright/test";
-import { LoginPage } from "../../utils/endpoints/classes/login.js";
-import { extractEmployeeList } from "../../utils/endpoints/classes/general/commonMethod.js";
+import { LoginPage } from "../../utils/endpoints/classes/login";
+import { extractEmployeeList } from "../../utils/endpoints/classes/general/commonMethod";
 
-import { Attandance } from "../../utils/endpoints/classes/Attandance/myAttandance.js";
+import { Attandance } from "../../utils/endpoints/classes/Attandance/myAttandance";
 import loginExpected from "../../fixtures/Response/loginExpected.json" assert { type: "json" };
 
 test.describe("Work From Home Hybrid Request API", () => {
