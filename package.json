@@ -21,12 +21,23 @@
   "description": "Automation tests with Playwright",
   "devDependencies": {
     "@playwright/test": "^1.55.1",
-    "@types/node": "^22.15.1",
+    "@types/node": "^22.18.8",
     "allure-commandline": "^2.34.1",
     "allure-js-commons": "^3.3.3",
     "allure-playwright": "^3.4.1"
   },
   "dependencies": {
     "playwright": "^1.55.1"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShaluDevda/FABHR_QA.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ShaluDevda/FABHR_QA/issues"
+  },
+  "homepage": "https://github.com/ShaluDevda/FABHR_QA#readme"
 }

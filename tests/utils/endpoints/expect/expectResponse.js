@@ -43,6 +43,10 @@ class ExpectResponse {
     expect(response).toBe(500);
   }
 
+  async serverNotResponding(response) {
+    expect(response).toBe(constants.serverNotResponding);
+  }
+
 async fieldRequired(property) {
   expect(property).toBe(constants.fieldRequired);
 }
